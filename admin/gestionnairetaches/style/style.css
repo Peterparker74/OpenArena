@@ -1,0 +1,36 @@
+#wrapper{
+    background-color: white;    
+    width:80%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 400vh;
+    display: none;
+    transition: transform 0.3s ease-in-out;
+    z-index: 2;
+    }
+    #affichagepubwrapper{
+        overflow: hidden;
+        display: flex;
+        width: 100%;
+    }
+
+    #souswrapper a{
+        text-decoration: none;
+    }
+
+    #souswrapper .titredesouswrapper{
+        height: 30px;
+        margin-left: 10px;
+        font-family: 'Tiro Devanagari Sanskrit', serif;
+        font-size: 20px;
+
+    }
+    #souswrapper .instruction{
+        margin-bottom: 20px;
+        font-size: 20px;
+        border-radius: 1px;
+        justify-content: center;
+        text-align: end;
+        margin-right: 15px;
+    }
