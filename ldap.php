@@ -35,8 +35,8 @@ else {
 //Lien entre l'AD et le site web
 
 <?php
-$ldapServer = 'ldap://openarena-paris.fr';
-$ldapBaseDN = 'dc=example,dc=com';
+$ldapServer = 'ldap://localhost';
+$ldapBaseDN = 'dc=openarena-paris,dc=fr';
 
 $ldapConn = ldap_connect($ldapServer);
 if (!$ldapConn) {
