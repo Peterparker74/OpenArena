@@ -1,0 +1,40 @@
+/* Styles pour la barre de navigation */
+.navbar {
+    padding: 10px 0;
+}
+
+.navbar-brand {
+    font-size: 24px;
+}
+
+.navbar-nav .nav-link {
+    color: #fff;
+    margin-left: 20px;
+    font-size: 18px;
+}
+
+/* Styles pour le tableau des modes de jeu */
+.table {
+    width: 100%;
+}
+
+.table th, .table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Styles pour le pied de page */
+footer {
+    background-color: #343a40;
+    color: #fff;
+    padding: 20px 0;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
