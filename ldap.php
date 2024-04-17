@@ -54,3 +54,8 @@ if (!$ldapBind) {
 
 ldap_close($ldapConn);
 ?>
+
+//Lien entre le serveur de jeu et le site web
+<?php
+
+?>
