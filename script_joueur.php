@@ -20,7 +20,7 @@ if (!ssh2_auth_password($connection, 'rt', 'rt')) {
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Si le bouton "Démarrer serveur" a été cliqué
     if (isset($_POST["start"])) {
-        $command = 'export DISPLAY=:0; openarena +connect 195.221.40.66:27960';
+        $command = 'export DISPLAY=:0; openarena +connect 195.221.40.129:27960';
         $stream = ssh2_exec($connection, $command);
         stream_set_blocking($stream, true);
         $stream_out = ssh2_fetch_stream($stream, SSH2_STREAM_STDIO);
