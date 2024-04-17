@@ -30,3 +30,27 @@ else {
 
 	 }
 ?>
+
+
+//Lien entre l'AD et le site web
+
+<?php
+$ldapServer = 'ldap://openarena-paris.fr';
+$ldapBaseDN = 'dc=example,dc=com';
+
+$ldapConn = ldap_connect($ldapServer);
+if (!$ldapConn) {
+    die("Connexion LDAP impossible");
+}
+
+ldap_set_option($ldapConn, LDAP_OPT_PROTOCOL_VERSION, 3);
+
+$ldapBind = ldap_bind($ldapConn, $_POST['username'] . '@openarena-paris.fr', $_POST['password']);
+if (!$ldapBind) {
+    die("Authentification LDAP échouée");
+} else {
+    echo "Authentification LDAP réussie";
+}
+
+ldap_close($ldapConn);
+?>
