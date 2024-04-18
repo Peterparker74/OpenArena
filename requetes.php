@@ -121,7 +121,7 @@ function mafficher()
 			// Ajouter le chemin de l'image à chaque objet dans le résultat
 			foreach ($result as $map) {
 				// Modifier le chemin de l'image en fonction de l'emplacement sur votre serveur
-				$map->chemin_image = "OpenArena\accueil\img" . $map->photo_map;
+				$map->chemin_image = "accueil/img/". $map->photo_map;
 			}
 	
 			$sql->closeCursor();

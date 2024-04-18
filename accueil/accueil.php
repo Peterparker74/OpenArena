@@ -15,8 +15,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Titre de la page</title>
     <!-- Lien vers votre fichier CSS externe (facultatif) -->
-    <link rel="stylesheet" href="/openarena/accueil/style/style.css">
-    <link rel="stylesheet" type="text/javascript" href="/openarena/accueil/script/script.js">
+    <link rel="stylesheet" href="/OpenArena/accueil/style/style.css">
+    <link rel="stylesheet" type="text/javascript" href="/OpenArena/accueil/script/script.js">
 </head>
 <body style="height: 100%; width: 100%; background-color: #f2f2f2; margin: 0; padding: 0;">
 
@@ -33,9 +33,10 @@
     </div>
 
     <div style="display: flex; align-items: center; justify-content: space-between; background-color: #333; padding: 10px;">
-        <a style="color: #fff;" href="/openarena/modejeu.php">Mode de Jeux</a>
-        <a style="color: #fff;" href="/openarena/map.php">Map</a>
-        <a style="color: #fff;" href="/openarena/resultats/resultats.php">Résultats</a>
+        <a style="color: #fff;" href="../modejeu.php">Mode de Jeux</a>
+        <a style="color: #fff;" href="../map.php">Map</a>
+        <a style="color: #fff;" href="../resultats/resultats.php">Résultats</a>
+        <a style="color: #fff;" href="../index_joueur.php">Jouer</a>
         
     </div>
 
@@ -116,8 +117,8 @@
 
         <?php foreach ($lesmaps as $unemap): ?>
         <div class="unemap" style="width: 25%;height: 270px;border: 5px solid lightgray;border-radius: 5px;overflow: hidden;margin-bottom: 30px;">
-            <img src="/openarena/accueil/img/<?=$unemap->photo_map?>" style="width: 100%;height: 90%;flex-shrink: 0;">
-            <a href="/openarena//presentationmap/index.php?id=<?=$unemap->id_map?>"><button style="width: 100%;height: 10%;background-color: rgb(0, 211, 0);border: none;color: white;">Voir plus</button></a>
+            <img src="/OpenArena/accueil/img/<?=$unemap->photo_map?>" style="width: 100%;height: 90%;flex-shrink: 0;">
+            <a href="/OpenArena//presentationmap/index.php?id=<?=$unemap->id_map?>"><button style="width: 100%;height: 10%;background-color: rgb(0, 211, 0);border: none;color: white;">Voir plus</button></a>
         </div>
             <?php endforeach; ?>
 
@@ -131,7 +132,7 @@
               }
     </style>
 
-    <script type="text/javascript" src="/openarena/accueil/script/script.js"></script>
-    <script type="text/javascript" src="/openarena/jquery-3.7.0.js"></script>
+    <script type="text/javascript" src="/OpenArena/accueil/script/script.js"></script>
+    <script type="text/javascript" src="/OpenArena/jquery-3.7.0.js"></script>
 </body>
 </html>

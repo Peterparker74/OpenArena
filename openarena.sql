@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Hôte : 127.0.0.1
--- Généré le : dim. 14 avr. 2024 à 23:53
--- Version du serveur : 10.4.28-MariaDB
--- Version de PHP : 8.2.4
+-- Host: 127.0.0.1
+-- Generation Time: Apr 17, 2024 at 09:54 PM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `openarena`
+-- Database: `openarena`
 --
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `evenement`
+-- Table structure for table `evenement`
 --
 
 CREATE TABLE `evenement` (
@@ -38,7 +38,7 @@ CREATE TABLE `evenement` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Déchargement des données de la table `evenement`
+-- Dumping data for table `evenement`
 --
 
 INSERT INTO `evenement` (`id_evenement`, `nom_evenement`, `modedejeux`, `date_creation`, `date_debut`, `pseudo_createur`, `photo_evenement`) VALUES
@@ -51,18 +51,18 @@ INSERT INTO `evenement` (`id_evenement`, `nom_evenement`, `modedejeux`, `date_cr
 -- --------------------------------------------------------
 
 --
--- Structure de la table `map`
+-- Table structure for table `map`
 --
 
 CREATE TABLE `map` (
-  `id_map` int(11) NOT NULL,
+  `id_map` int(100) NOT NULL,
   `nom_map` varchar(100) NOT NULL,
   `photo_map` text NOT NULL,
   `description_map` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Déchargement des données de la table `map`
+-- Dumping data for table `map`
 --
 
 INSERT INTO `map` (`id_map`, `nom_map`, `photo_map`, `description_map`) VALUES
@@ -73,12 +73,83 @@ INSERT INTO `map` (`id_map`, `nom_map`, `photo_map`, `description_map`) VALUES
 (5, 'Map 5', 'map5.jpg', ''),
 (6, 'Map 6', 'map6.jpg', ''),
 (7, 'Map 7', 'map7.jpg', ''),
-(8, 'Map 8', 'map8.jpg', '');
+(8, 'Map 8', 'map8.jpg', ''),
+(9, 'dm1', 'dm1.jpg', ''),
+(10, 'dm2', 'dm2.jpg\r\n', ''),
+(11, 'dm3', 'dm3.jpg', ''),
+(12, 'dm4', 'dm4.jpg', ''),
+(13, 'dm6', 'dm6.jpg', ''),
+(14, 'dm13', 'dm13.jpg', ''),
+(16, 'dm20', 'dm20.jpg', ''),
+(17, 'ctf1', 'ctf1.jpg', ''),
+(40, 'dm17', 'dm17.jpg', '');
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `utilisateurs`
+-- Table structure for table `modes`
+--
+
+CREATE TABLE `modes` (
+  `id_mode` int(11) NOT NULL,
+  `nom_mode` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `modes`
+--
+
+INSERT INTO `modes` (`id_mode`, `nom_mode`) VALUES
+(10, 'DeathMatch'),
+(11, 'Team Deathmatch'),
+(12, 'Capture the Flag'),
+(13, 'Duel'),
+(14, 'Free for All'),
+(15, 'Instagib'),
+(16, 'Rocket Arena'),
+(17, 'Clan Arena');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `modes_maps`
+--
+
+CREATE TABLE `modes_maps` (
+  `id_mode` int(11) NOT NULL,
+  `id_map` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `modes_maps`
+--
+
+INSERT INTO `modes_maps` (`id_mode`, `id_map`) VALUES
+(10, 10),
+(10, 12),
+(10, 13),
+(10, 40),
+(11, 9),
+(11, 11),
+(11, 16),
+(12, 17),
+(13, 12),
+(13, 13),
+(13, 14),
+(14, 10),
+(14, 13),
+(15, 12),
+(15, 13),
+(16, 10),
+(16, 12),
+(16, 14),
+(17, 13),
+(17, 40);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `utilisateurs`
 --
 
 CREATE TABLE `utilisateurs` (
@@ -95,17 +166,21 @@ CREATE TABLE `utilisateurs` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Déchargement des données de la table `utilisateurs`
+-- Dumping data for table `utilisateurs`
 --
 
 INSERT INTO `utilisateurs` (`pseudo`, `nom_utilisateur`, `prenom`, `adresse_email`, `mot_de_passe`, `type`, `date_inscription`, `ville`, `sexe`, `photo_de_profil`) VALUES
 ('admin', 'Admin', '', 'admin@gmail.com', '$2y$12$owtMcgvqCt3TLyhiYjpYEupePSf6/Xl9a9x6kqYDIOz2fIFpin2c2', 'admin', NULL, 'fr', 'Masculin', 'uploads/photoprofilhomme.jpg'),
 ('brown_chris', 'chris', 'brown', 'brown.chris@open-arena.fr', '$2y$12$4US25qM46xcr62Q1KyNdBehf9OHloei./oTJGYilL3AbVciMPeCAG', 'personne', '2024-04-14', 'fr', 'Masculin', 'uploads/photoprofilhomme.jpg'),
+('chancel_kotin', 'kotin', 'chancel', 'chancel.kotin@open-arena.fr', '$2y$12$cU5kAhxnarkpQrSkxSGlOekghZzqQDijMcA6YENnONfHFp5chpUWO', 'personne', '2024-04-17', 'fr', 'Masculin', ''),
+('chancel_kotin1', 'KOTIN', 'Chancel', 'chancel.kotin@open-arena.fr', '$2y$12$qL59GRe5NschmU3bef8oFe1SrXZd2eLwoi/rxc3ZX7k8auv1PdTpi', 'personne', '2024-04-17', 'fr', 'Masculin', ''),
+('clarisse_masson', 'masson', 'clarisse', 'clarisse.masson@open-arena.fr', '$2y$12$iun.F4YyoTfEk9tgKt9ReezsmXct7IyMu4RkKQ39AVYhDCZ4zdRmm', 'personne', '2024-04-17', 'fr', 'Féminin', ''),
 ('couffo_barack', 'barack', '', 'couffo.barack@open-arena.fr', '$2y$12$DEJ.H/I9u9EV5bft2UP5sOkVif0zzrabhKRmDTRQ5e2QkPCBcxooO', 'organisateur', NULL, '', '', ''),
 ('eddy', 'Eddy', '', 'eddy@gmail.com', '$2y$12$XnRDwd6y7IpqDG73hb33ROCGrlfftFPLwL6hGaLei9pYoHD5FSLiy', 'personne', NULL, '', '', ''),
 ('eline', 'eline', '', 'eline@gmail.com', '$2y$12$AxBxwTRqY99S/xprSLtLbePr7KVdaF3NwnZNuCQyObwVHt/32yUam', 'personne', NULL, 'fr', 'Féminin', 'uploads/photoprofilfemme.jpg'),
 ('erw', 'Erw', '', 'didymedide0808@gmail.com', '$2y$12$28F.jWKXR9m5chO16e8Jx.nDKOAFoXm8b/s09e6Vs9nU6uK67M9W6', 'personne', NULL, 'fr', 'Masculin', 'uploads/1Capture d’écran 2022-03-25 092343.png'),
 ('kerry_john', 'john', '', 'kerry.@open-arena.fr', '$2y$12$6E2CGg6LY1CnWWV4P.JJR.irw6H1MzDP6OaBXkpTha58OQU6aN.ha', 'organisateur', NULL, '', '', ''),
+('marion_guionnet', 'guionnet', 'marion', 'marion.guionnet@open-arena.fr', '$2y$12$xfsyxoFZVORQZW80QDBu1er09zW4dfFul.Xs2xhGeSD2AT8JoCZ2K', 'personne', '2024-04-15', 'fr', 'Féminin', ''),
 ('moiadmin', 'MoiAdmin', '', 'moiadmin@gmail.com', '$2y$12$NwRfktT2DX7LsmnYIAp3buhwMDpRQ.4uRNBtvyDjnwzI1NbX73Die', 'organisateur', NULL, '', '', ''),
 ('musk_elon', 'Elon', 'Musk', 'musk.elon@open-arena.fr', '$2y$12$lwRPZGkBn2lQcO3610EKNeerWueqf6A85G0fH5TL9uTNY2gvdNOqq', 'personne', '2024-04-14', 'fr', 'Masculin', ''),
 ('organisateur_1', 'Organisateur1', '', 'organisateur1@gmail.com', '$2y$12$g82VD2qCqX7k/A0ypfittOI/YIhNTnCUtM/7jSzomRVfnKfZ2k3sK', 'organisateur', NULL, '', '', ''),
@@ -124,7 +199,7 @@ INSERT INTO `utilisateurs` (`pseudo`, `nom_utilisateur`, `prenom`, `adresse_emai
 -- --------------------------------------------------------
 
 --
--- Structure de la table `utilisateur_evenement`
+-- Table structure for table `utilisateur_evenement`
 --
 
 CREATE TABLE `utilisateur_evenement` (
@@ -133,7 +208,7 @@ CREATE TABLE `utilisateur_evenement` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Déchargement des données de la table `utilisateur_evenement`
+-- Dumping data for table `utilisateur_evenement`
 --
 
 INSERT INTO `utilisateur_evenement` (`pseudo`, `id_evenement`) VALUES
@@ -150,48 +225,78 @@ INSERT INTO `utilisateur_evenement` (`pseudo`, `id_evenement`) VALUES
 ('thug', 21);
 
 --
--- Index pour les tables déchargées
+-- Indexes for dumped tables
 --
 
 --
--- Index pour la table `evenement`
+-- Indexes for table `evenement`
 --
 ALTER TABLE `evenement`
   ADD PRIMARY KEY (`id_evenement`);
 
 --
--- Index pour la table `map`
+-- Indexes for table `map`
 --
 ALTER TABLE `map`
   ADD PRIMARY KEY (`id_map`);
 
 --
--- Index pour la table `utilisateurs`
+-- Indexes for table `modes`
+--
+ALTER TABLE `modes`
+  ADD PRIMARY KEY (`id_mode`);
+
+--
+-- Indexes for table `modes_maps`
+--
+ALTER TABLE `modes_maps`
+  ADD PRIMARY KEY (`id_mode`,`id_map`),
+  ADD KEY `id_map` (`id_map`);
+
+--
+-- Indexes for table `utilisateurs`
 --
 ALTER TABLE `utilisateurs`
   ADD PRIMARY KEY (`pseudo`);
 
 --
--- Index pour la table `utilisateur_evenement`
+-- Indexes for table `utilisateur_evenement`
 --
 ALTER TABLE `utilisateur_evenement`
   ADD PRIMARY KEY (`pseudo`,`id_evenement`);
 
 --
--- AUTO_INCREMENT pour les tables déchargées
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT pour la table `evenement`
+-- AUTO_INCREMENT for table `evenement`
 --
 ALTER TABLE `evenement`
   MODIFY `id_evenement` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
--- AUTO_INCREMENT pour la table `map`
+-- AUTO_INCREMENT for table `map`
 --
 ALTER TABLE `map`
-  MODIFY `id_map` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_map` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+
+--
+-- AUTO_INCREMENT for table `modes`
+--
+ALTER TABLE `modes`
+  MODIFY `id_mode` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `modes_maps`
+--
+ALTER TABLE `modes_maps`
+  ADD CONSTRAINT `modes_maps_ibfk_1` FOREIGN KEY (`id_mode`) REFERENCES `modes` (`id_mode`),
+  ADD CONSTRAINT `modes_maps_ibfk_2` FOREIGN KEY (`id_map`) REFERENCES `map` (`id_map`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

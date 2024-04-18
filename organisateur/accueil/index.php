@@ -108,7 +108,8 @@
 
 
     <div style="height: 40px;background-color: blue;display: flex;align-items: center;">
-        <a href="../creerevenement/index.php"><button style="background: green;border: none;color: white;border-radius: white;height: 25px;border-radius: 5px;margin-left: 30px;">Définir un evenement</button></a>
+        <a href="../creerevenement/index.php"><button style="background: black;border: none;color: white;border-radius: white;height: 25px;border-radius: 5px;margin-left: 30px;">Définir un evenement</button></a>
+        <a href="../index.php"><button style="background: black;border: none;color: white;border-radius: white;height: 25px;border-radius: 5px;margin-left: 30px;">Serveur Openarena</button></a>
     </div>
 
     <div style="display: flex;justify-content: center;margin-bottom: 50px;position: absolute;bottom: 100px;width: 100%;">
