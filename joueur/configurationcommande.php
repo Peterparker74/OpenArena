@@ -1,3 +1,13 @@
+<?php
+    /*ini_set('display_errors', 1);
+    error_reporting(E_ALL);
+    require_once '../config.php'; // On inclu la connexion à la bdd
+    require("../requetes.php");
+
+    session_start();
+    
+    verifierconnexionpersonne(); */
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -99,8 +109,22 @@
 <button onclick="changeKey('right', 1)">→</button>
 </div>
 </div>
-<button class="advanced-options">Options avancées</button>
-<button id="resetButton" onclick="redirectioncommandedefaut();" style="background-color: red; color: white; margin-top: 50px; margin-bottom: 50px;">
+
+<div class="controls" style="margin-top: 60px;">
+<div class="control">
+<img src="/openarena/game2.jpg" style="height: 40px;width: 40px" />
+</div>
+<div class="control">
+<div class="title" style="background-color: yellow;color: red;">Tirer</div>
+<button onclick="changeKeytir('right', -1)">←</button>
+<span id="keytir">a</span>
+<button onclick="changeKeytir('right', 1)">→</button>
+</div>
+</div>
+
+
+<button class="advanced-options" style="height: 40px;">Options avancées</button>
+<button id="resetButton" onclick="redirectioncommandedefaut();" style="background-color: red; color: white; margin-top: 50px; margin-bottom: 50px;height: 40px;">
  
       Revenir aux commandes par défaut
  
@@ -108,27 +132,37 @@
  
 <div id="error" style="color: red;"></div>
  
-<button id="Valider" type="submit" onclick="soumission(event);afficherconfiguration();verifiertoucheduplique();">Valider</button>
+<button id="Valider" type="submit" onclick="verifiertoucheduplique();afficherconfiguration();soumission(event);">Valider</button>
 </form>
 <script>
         const valider = document.querySelector("#Valider");
         const keys = ['Fleche Gauche', 'Fleche Haut', 'Fleche Bas', 'Fleche Droite'];
+        const keystir = ['a', 'b', 'c', 'd', 'x'];
  
         var valeur1 = document.createElement('div');
         valeur1.id = 'valeur1';
+        valeur1.setAttribute('style','visibility: hidden;');
         document.body.appendChild(valeur1);
  
         var valeur2 = document.createElement('div');
         valeur2.id = 'valeur2';
+        valeur2.setAttribute('style','visibility: hidden;');
         document.body.appendChild(valeur2);
  
         var valeur3 = document.createElement('div');
         valeur3.id = 'valeur3';
+        valeur3.setAttribute('style','visibility: hidden;');
         document.body.appendChild(valeur3);
  
         var valeur4 = document.createElement('div');
         valeur4.id = 'valeur4';
+        valeur4.setAttribute('style','visibility: hidden;');
         document.body.appendChild(valeur4);
+        
+        var valeur5 = document.createElement('div');
+        valeur5.id = 'valeur5';
+        valeur5.setAttribute('style','visibility: hidden;');
+        document.body.appendChild(valeur5);
 
  
         function validerFormulaire() {
@@ -142,6 +176,12 @@
             let currentIndex = keys.indexOf(keyElement.textContent);
             currentIndex = (currentIndex + delta + keys.length) % keys.length;
             keyElement.textContent = keys[currentIndex];
+        }
+        function changeKeytir(direction, delta) {
+            const keyElement = document.getElementById('keytir');
+            let currentIndex = keystir.indexOf(keyElement.textContent);
+            currentIndex = (currentIndex + delta + keystir.length) % keystir.length;
+            keyElement.textContent = keystir[currentIndex];
         }
         function afficherconfiguration() {
             const keys = {
@@ -219,6 +259,27 @@
                 console.log(`bind DOWNARROW "+right"`);
                 valeur4.innerHTML=`bind DOWNARROW "+right"`;
             }
+            
+            const keytir = document.getElementById('keytir').textContent
+            
+            if(keytir === 'a'){
+            	console.log(`bind a "+right"`);
+            	valeur5.innerHTML=`bind a "+attack"`;
+            }else if(keytir === 'b'){
+                console.log(`bind b "+right"`);
+                valeur4.innerHTML=`bind b "+right"`;
+            }else if(keytir === 'c'){
+                console.log(`bind c "+right"`);
+                valeur4.innerHTML=`bind c "+right"`;
+            }else if(keytir === 'd'){
+                console.log(`bind d "+right"`);
+                valeur4.innerHTML=`bind d "+right"`;
+            }else if(keytir === 'x'){
+                console.log(`bind  "+right"`);
+                valeur4.innerHTML=`bind x "+right"`;
+            }
+            
+            
             /*bashCommands += `echo "seta +forward \\"${keys.up}\\"" >> ~/.openarena/baseoa/q3config.cfg\n`;
             bashCommands += `echo "seta +back \\"${keys.down}\\"" >> ~/.openarena/baseoa/q3config.cfg\n`;
             bashCommands += `echo "seta +right \\"${keys.right}\\"" >> ~/.openarena/baseoa/q3config.cfg\n`;*/
@@ -238,30 +299,38 @@
             // Trouver des valeurs en double
             const keySet = new Set(keys);
             if (keySet.size !== keys.length) {
-                error.innerHTML="Attention certaines touches ont la meme valeur";
+                error.innerHTML="Attention certaines touches que vous configurés sont dupliqués. Veuillez effectuer des mofifications";
             } else {
                 error.innerHTML="";
             }
         }
  
         function soumission(event) {
+            const error=document.querySelector("#error");
+            const keyLeft = document.getElementById('key-left').textContent;
+            const keyUp = document.getElementById('key-up').textContent;
+            const keyDown = document.getElementById('key-down').textContent;
+            const keyRight = document.getElementById('key-right').textContent;
+            const keyTir = document.getElementById('keytir').textContent;
+ 
+            // Créer un tableau des valeurs de touches
+            const keys = [keyLeft, keyUp, keyDown, keyRight];
+ 
+            // Trouver des valeurs en double
+            const keySet = new Set(keys);
+            if (keySet.size !== keys.length) {
+                error.innerHTML="Attention certaines touches que vous configurez sont dupliqués. Veuillez effectuer des changements";
+            }else{
+            
             // Collecter les valeurs des divs
             var valeur1 = document.getElementById('valeur1').textContent;
             var valeur2 = document.getElementById('valeur2').textContent;
             var valeur3 = document.getElementById('valeur3').textContent;
             var valeur4 = document.getElementById('valeur4').textContent;
+            var valeur5 = document.getElementById('valeur5').textContent;
  
             // Utiliser un Set pour vérifier l'unicité
-            var valeurs = [valeur1, valeur2, valeur3, valeur4];
-            var valeursSet = new Set(valeurs);
- 
-            // Vérifier si toutes les valeurs sont uniques
-            if (valeursSet.size !== valeurs.length) {
-                // Il y a des doublons, donc empêcher la soumission du formulaire
-                event.preventDefault();
-                document.getElementById('error').textContent = "Les valeurs doivent être uniques!";
-                return; // Arrêter l'exécution de la fonction ici
-            }else{
+            var valeurs = [valeur1, valeur2, valeur3, valeur4, valeur5];
  
             // S'il n'y a pas de doublons, procéder avec la soumission
             fetch('traitementconfiguration.php', {
@@ -271,7 +340,11 @@
                 },
                 body: 'data=' + encodeURIComponent(valeurs.join("\n"))
             })
-            .then(response => response.text())
+            .then(response =>{
+            	if(response.ok){
+            		window.location.href='configurationcommandesucces.php';
+            	}
+            })
             .then(data => {
                 console.log(data); // Afficher la réponse du serveur
             })
@@ -605,7 +678,11 @@ seta com_zoneMegs "24"
         },
         body: 'data=' + encodeURIComponent(montexte)
     })
-    .then(response => response.text())
+    .then(response =>{
+    	if(response.ok){
+    		window.location.href='configurationcommandesucces.php';
+    	}
+    })
     .then(data => {
         console.log(data); // Afficher la réponse du serveur
     })

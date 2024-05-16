@@ -40,7 +40,7 @@
 
                     }
                     else if($typeutilisateur=='personne'){
-                        header('Location: accueil/accueil.php');
+                        header('Location: joueur/accueiljoueur.php');
                         die();
 
                     }
