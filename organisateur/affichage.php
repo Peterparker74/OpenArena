@@ -1,79 +1,168 @@
 
 
 <?php
-    require_once '../config.php'; // On inclu la connexion à la bdd
-    require("../requetes.php");
+// Connexion à la base de données
+require_once '../config.php';
+require("../requetes.php");
 
-    session_start();
+session_start();
     
-    verifierconnexionorganisateur();
+verifierconnexionorganisateur();
 
+// Récupérer les tournois depuis la base de données
+$stmt = $bdd->query('SELECT id_tournoi, nom_tournoi FROM tournoi');
+$tournois = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Titre de la page</title>
-    <!-- Lien vers votre fichier CSS externe (facultatif) -->
-    <link rel="stylesheet" href="style/style.css">
-    <link rel="stylesheet" type="text/javascript" href="script/script.js">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Afficher les matchs par tournoi</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f8f9fa;
+}
 
-        h1 {
-            text-align: center;
-        }
+h2 {
+    margin-bottom: 20px;
+    color: #007bff;
+}
 
-        form {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 20px;
-        }
+form {
+    margin-bottom: 20px;
+}
 
-        p {
-            margin-bottom: 10px;
-        }
+label {
+    font-weight: bold;
+    color: #343a40;
+}
 
-        button.start, button.stop {
-            padding: 10px 20px;
-            margin: 5px;
-            font-size: 16px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
+select {
+    width: 300px;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+}
 
-        button.start:disabled, button.stop:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
+input[type="submit"] {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
 
-        button.start {
-            background-color: #4caf50; /* Green */
-            color: white;
-        }
+input[type="submit"]:hover {
+    background-color: #0056b3;
+}
 
-        button.stop {
-            background-color: #f44336; /* Red */
-            color: white;
-        }
+#matchsContainer {
+    margin-top: 20px;
+}
 
-        button:hover {
-            background-color: #555;
-        }
-    </style>
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+button {
+    padding: 8px 20px;
+    font-size: 14px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+form.scoreForm {
+    margin-top: 10px;
+}
+
+form.scoreForm input[type="text"] {
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+form.scoreForm input[type="submit"] {
+    padding: 8px 20px;
+    font-size: 14px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+form.scoreForm input[type="submit"]:hover {
+    background-color: #218838;
+}
+
+/** */
+#wrapper{
+    background-color: white;    
+    width:80%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 400vh;
+    display: none;
+    transition: transform 0.3s ease-in-out;
+    z-index: 2;
+    }
+    #affichagepubwrapper{
+        overflow: hidden;
+        display: flex;
+        width: 100%;
+    }
+
+    #souswrapper a{
+        text-decoration: none;
+    }
+
+    #souswrapper .titredesouswrapper{
+        height: 30px;
+        margin-left: 10px;
+        font-family: 'Tiro Devanagari Sanskrit', serif;
+        font-size: 20px;
+
+    }
+    #souswrapper .instruction{
+        margin-bottom: 20px;
+        font-size: 20px;
+        border-radius: 1px;
+        justify-content: center;
+        text-align: end;
+        margin-right: 15px;
+    }
+</style>
 </head>
 <body>
 
-    <div id="tetedepage" style="display: flex;justify-content: space-between;align-items: center;background-color: red;">
+<div id="tetedepage" style="display: flex;justify-content: space-between;align-items: center;background-color: red;">
 
         <a href="./index.php"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-house-fill" viewBox="0 0 16 16"> <path fill-rule="evenodd" d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6zm5-.793V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/> <path fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/> </svg></a>
 
@@ -168,76 +257,110 @@
 <a href="competition.php"><button style="background: black;border: none;color: white;border-radius: white;height: 25px;border-radius: 5px;margin-left: 30px;">Créer tournoi</button></a>
 </div>
 
-    <h1>Contrôle du serveur OpenArena</h1>
-    <form action="script.php" method="post">
-        <?php
-        // Statut du serveur (démarré ou arrêté)
+<h2>Choisissez un tournoi :</h2>
+
+<form action="" method="post">
+  <label for="tournoiSelect">Tournoi :</label>
+  <select id="tournoiSelect" name="tournoi_id">
+   <?php
+    foreach ($tournois as $tournoi) {
+        // Vérifie si l'ID du tournoi correspond à celui sélectionné
+        $selected = ($tournoi['id_tournoi'] == $_POST['tournoi_id']) ? 'selected' : '';
+        echo '<option value="' . $tournoi['id_tournoi'] . '" ' . $selected . '>' . $tournoi['nom_tournoi'] . '</option>';
+    }
+    ?>
+  </select>
+  <input type="submit" value="Afficher les matchs">
+</form>
+
+<div id="matchsContainer">
+  <?php if ($_SERVER['REQUEST_METHOD'] === 'POST') : ?>
+    <?php
+    // Vérifier si un tournoi a été sélectionné
+    if (isset($_POST['tournoi_id'])) {
+      $tournoiId = $_POST['tournoi_id'];
+
+      //On récupère les participations pour voir si il ya un champion:
+      $stmtChampion = $bdd->prepare('SELECT * FROM tournoi  WHERE id_tournoi = ?');
+      $stmtChampion->execute([$tournoiId]);
+      $championRow = $stmtChampion->fetch(PDO::FETCH_ASSOC);
+      if ($championRow['vainqueur']!= "") {
+        // Il y a une participation à la phase "champion"
+        // Récupérez la colonne "joueurs"
+        echo '<h2>Vainqueur :</h2>';
+        echo '<ul>';
+        echo '<li>Le vainqueur de ce tournoi est <strong>'.$championRow['vainqueur'].'</strong> </li>';
+      }
+    
+
+      // Requête pour récupérer les matchs du tournoi sélectionné
+      $stmt = $bdd->prepare('SELECT * FROM matchs WHERE id_tournoi = ? ORDER BY FIELD(phase, \'finale\', \'demi-finale\', \'quart de finale\')');
+      $stmt->execute([$tournoiId]);
+      $matchs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+      // Affichage des matchs par section
+      $currentPhase = '';
+      foreach ($matchs as $match) {
+        if ($match['phase'] !== $currentPhase) {
+          echo '<h2>' . $match['phase'] . ' :</h2>';
+          echo '<ul>';
+          $currentPhase = $match['phase'];
+        }
         
-            $server_status = "";
-            // Connexion au serveur distant
-            $connection = ssh2_connect('195.221.40.129', 22);
-            if (!$connection) {
-                echo "Échec de la connexion au serveur";
-                exit;
-            } else {
-                echo "Connexion au serveur réussie<br>";
-            }
-
-           
-
-
-            // Authentification
-            if (!ssh2_auth_password($connection, 'rt', 'rt')) {
-                echo "Échec de l'authentification";
-                exit;
-            } else {
-                echo "Authentification réussie<br>";
-            }
-
-             //Exécution de la commande
-             $stream = ssh2_exec($connection, 'sudo /usr/bin/systemctl status openarena-server');
-             stream_set_blocking($stream, true);
-             $stream_out = ssh2_fetch_stream($stream, SSH2_STREAM_STDIO);
-             $output = stream_get_contents($stream_out);
-
-            // Vérification si le service est actif
-            if (strpos($output, 'Active: active') !== false) {
-                $server_status = "Actif";
-            } 
-            // Vérification si le service est en échec
-            elseif (strpos($output, 'Active: failed') !== false) {
-                $server_status = "Inactif";
-            } 
-            // Si aucun des deux états n'est trouvé, le statut n'est pas clair
-            else {
-                $server_status = "Le statut du serveur n'est pas clair";
-            }
-
-            
-
-
-        // Afficher le statut du serveur
-        echo "<p>Statut du serveur : $server_status</p>";
-
-        // Désactiver le bouton "Démarrer serveur" si le serveur est déjà démarré
-        if ($server_status === "Actif") {
-            echo '<button type="submit" name="start" class="start" disabled>Démarrer serveur</button>';
-        } else {
-            echo '<button type="submit" name="start" class="start">Démarrer serveur</button>';
+        echo '<li>' . $match['joueur1'] . ' VS ' . $match['joueur2'] . ' ';
+        echo '<button style="background-color: green;" class="lancerOpenArenaBtn">Lancer la partie</button>';
+        if($match['score_joueur1']!=0 || $match['score_joueur2']!=0)
+            echo 'Résultats: '.$match['score_joueur1'].'-'.$match['score_joueur2'];
+        else{
+            echo '<button onclick="showScoreForm(' . $match['id_matchs'] . ')">Saisir les scores</button>';
+            echo '<form id="scoreForm_' . $match['id_matchs'] . '" class="scoreForm" style="display: none;" action="tt_scores.php" method="post">';
+            echo '<input type="text" name="score_joueur1" placeholder="Score joueur 1">';
+            echo '<input type="text" name="score_joueur2" placeholder="Score joueur 2">';
+            //On envoie de manière cachée l'id du match, la phase et l'id du tournoi
+            echo '<input type="hidden" name="id_matchs" value="' . $match['id_matchs'] . '">';
+            echo '<input type="hidden" name="phase" value="' . $match['phase'] . '">';
+            echo '<input type="hidden" name="id_tournoi" value="' . $match['id_tournoi'] . '">';
+            echo '<input type="submit" value="Valider">';
         }
+       
+        echo '</form></li>';
+      }
+      echo '</ul>';
+    } else {
+      echo '<p>Veuillez sélectionner un tournoi.</p>';
+    }
+    ?>
+  <?php endif; ?>
+</div>
 
-        // Désactiver le bouton "Arrêter serveur" si le serveur est déjà arrêté
-        if ($server_status === "Inactif") {
-            echo '<button type="submit" name="stop" class="stop" disabled>Arrêter serveur</button>';
-        } else {
-            echo '<button type="submit" name="stop" class="stop">Arrêter serveur</button>';
-        }
-        ?>
-    </form>
+<script>
 
-    <!-- Lien vers votre fichier JavaScript externe (facultatif) -->
-    <script type="text/javascript" src="script/script.js"></script>
-    <script type="text/javascript" src="../../jquery-3.7.0.js"></script>
+// Gérer le lancement du jeu sur les Raspberry
+var lancerBtns = document.getElementsByClassName("lancerOpenArenaBtn");
+
+// Ajouter le gestionnaire d'événements à chaque bouton
+for (var i = 0; i < lancerBtns.length; i++) {
+    lancerBtns[i].addEventListener("click", function(){
+        var xhr1 = new XMLHttpRequest();
+        xhr1.open("GET", "http://195.221.40.1:5000/lancer_openarena", true); 
+        xhr1.send();
+        xhr2 = new XMLHttpRequest();
+        xhr2.open("GET", "http://195.221.40.2:5000/lancer_openarena", true); 
+        xhr2.send();
+    });
+}
+
+// Fonction pour afficher le formulaire de saisie des scores
+function showScoreForm(matchId) {
+    var scoreForm = document.getElementById('scoreForm_' + matchId);
+    if (scoreForm.style.display === 'none') {
+        scoreForm.style.display = 'block';
+    } else {
+        scoreForm.style.display = 'none';
+    }
+}
+
+</script>
+
 </body>
 </html>
-

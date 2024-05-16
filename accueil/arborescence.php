@@ -27,6 +27,16 @@
 <body>
 
 <canvas id="tournamentTree" width="900" height="700"></canvas>
+<?php 
+    require_once '../config.php';
+    $tournoiID = 1;
+    
+      // Requête pour récupérer les matchs du tournoi sélectionné
+      $stmt = $bdd->prepare('SELECT * FROM matchs WHERE id_tournoi = ? ORDER BY FIELD(phase, \'finale\', \'demi-finale\', \'quart de finale\')');
+      $stmt->execute([$tournoiId]);
+      $matchs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+?>
 
 <script>
     // Obtention du contexte du canvas
@@ -48,12 +58,12 @@
         ctx.fillText(playerName, x + width / 2, y + height / 2);
 
         // Ajouter une zone de texte pour le score à côté du rectangle du joueur
-        const scoreInput = document.createElement('input');
+        /*const scoreInput = document.createElement('input');
         scoreInput.type = 'text';
         scoreInput.className = 'scoreInput';
-        scoreInput.style.left = x + width + 1 + 'px'; // Position horizontale ajustée
-        scoreInput.style.top = y + height / 2 - 10 + 'px'; // Position verticale centrée
-        document.body.appendChild(scoreInput);
+        scoreInput.style.left = x + width + 270 + 'px'; // Position horizontale ajustée
+        scoreInput.style.top = y + height / 2 -10 + 'px'; // Position verticale centrée
+        document.body.appendChild(scoreInput);*/
     }
 
     // Fonction pour dessiner une ligne entre deux points
@@ -75,23 +85,40 @@
     const rectWidth = 120;
     const rectHeight = 40;
     const xVainqueur = 700;
+    
+    $q1="J1";
+    $q2="J2";
+    $q3="";
+    $q4="";
+    $q5="";
+    $q6="";
+    $q7="";
+    $q8="";
+    $d1="";
+    $d2="";
+    $d3="";
+    $d4="";
+    $f1="";
+    $f2="";
+    $v="";
 
-    // Dessiner les rectangles pour les équipes
-    drawRectWithScore(xQuarters - rectWidth / 2, yFirstRound - rectHeight / 2, rectWidth, rectHeight, 'Joueur 1');
-    drawRectWithScore(xQuarters - rectWidth / 2, yFirstRound + ySpacing - rectHeight / 2, rectWidth, rectHeight, 'Joueur 2');
-    drawRectWithScore(xQuarters - rectWidth / 2, yFirstRound + 2 * ySpacing - rectHeight / 2, rectWidth, rectHeight, 'Joueur 3');
-    drawRectWithScore(xQuarters - rectWidth / 2, yFirstRound + 3 * ySpacing - rectHeight / 2, rectWidth, rectHeight, 'Joueur 4');
-    drawRectWithScore(xQuarters - rectWidth / 2, yFirstRound + 4*ySpacing - rectHeight / 2, rectWidth, rectHeight, 'Joueur 5');
-    drawRectWithScore(xQuarters - rectWidth / 2, yFirstRound + 5*ySpacing - rectHeight / 2, rectWidth, rectHeight, 'Joueur 6');
-    drawRectWithScore(xQuarters - rectWidth / 2, yFirstRound + 6*ySpacing - rectHeight / 2, rectWidth, rectHeight, 'Joueur 7');
-    drawRectWithScore(xQuarters - rectWidth / 2, yFirstRound + 7*ySpacing - rectHeight / 2, rectWidth, rectHeight, 'Joueur 8');
-    drawRectWithScore(xSemiFinals - rectWidth / 2, yFirstRound + 0.5 * ySpacing - rectHeight / 2, rectWidth, rectHeight, '');
-    drawRectWithScore(xSemiFinals - rectWidth / 2, yFirstRound + 2.5 * ySpacing - rectHeight / 2, rectWidth, rectHeight, '');
-    drawRectWithScore(xSemiFinals - rectWidth / 2, yFirstRound + 4.5 * ySpacing - rectHeight / 2, rectWidth, rectHeight, '');
-    drawRectWithScore(xSemiFinals - rectWidth / 2, yFirstRound + 6.5 * ySpacing - rectHeight / 2, rectWidth, rectHeight, '');
-    drawRectWithScore(xFinal - rectWidth / 2, yFirstRound + 1.5 * ySpacing - rectHeight / 2, rectWidth, rectHeight, '');
-    drawRectWithScore(xFinal - rectWidth / 2, yFirstRound + 5.5 * ySpacing - rectHeight / 2, rectWidth, rectHeight, '');
-    drawRectWithScore(xVainqueur - rectWidth / 2, yFirstRound + 3.5 * ySpacing - rectHeight / 2, rectWidth, rectHeight, '');
+    
+
+    drawRectWithScore(xQuarters - rectWidth / 2, yFirstRound - rectHeight / 2, rectWidth, rectHeight, $q1);
+    drawRectWithScore(xQuarters - rectWidth / 2, yFirstRound + ySpacing - rectHeight / 2, rectWidth, rectHeight, $q2);
+    drawRectWithScore(xQuarters - rectWidth / 2, yFirstRound + 2 * ySpacing - rectHeight / 2, rectWidth, rectHeight, $q3);
+    drawRectWithScore(xQuarters - rectWidth / 2, yFirstRound + 3 * ySpacing - rectHeight / 2, rectWidth, rectHeight, $q4);
+    drawRectWithScore(xQuarters - rectWidth / 2, yFirstRound + 4*ySpacing - rectHeight / 2, rectWidth, rectHeight, $q5);
+    drawRectWithScore(xQuarters - rectWidth / 2, yFirstRound + 5*ySpacing - rectHeight / 2, rectWidth, rectHeight, $q6);
+    drawRectWithScore(xQuarters - rectWidth / 2, yFirstRound + 6*ySpacing - rectHeight / 2, rectWidth, rectHeight, $q7);
+    drawRectWithScore(xQuarters - rectWidth / 2, yFirstRound + 7*ySpacing - rectHeight / 2, rectWidth, rectHeight, $q8);
+    drawRectWithScore(xSemiFinals - rectWidth / 2, yFirstRound + 0.5 * ySpacing - rectHeight / 2, rectWidth, rectHeight, $d1);
+    drawRectWithScore(xSemiFinals - rectWidth / 2, yFirstRound + 2.5 * ySpacing - rectHeight / 2, rectWidth, rectHeight, $d2);
+    drawRectWithScore(xSemiFinals - rectWidth / 2, yFirstRound + 4.5 * ySpacing - rectHeight / 2, rectWidth, rectHeight, $d3);
+    drawRectWithScore(xSemiFinals - rectWidth / 2, yFirstRound + 6.5 * ySpacing - rectHeight / 2, rectWidth, rectHeight, $d4);
+    drawRectWithScore(xFinal - rectWidth / 2, yFirstRound + 1.5 * ySpacing - rectHeight / 2, rectWidth, rectHeight, $f1);
+    drawRectWithScore(xFinal - rectWidth / 2, yFirstRound + 5.5 * ySpacing - rectHeight / 2, rectWidth, rectHeight, $f2);
+    drawRectWithScore(xVainqueur - rectWidth / 2, yFirstRound + 3.5 * ySpacing - rectHeight / 2, rectWidth, rectHeight, $v);
 
     // Dessiner les lignes entre les équipes et les vainqueurs
     drawLine(xQuarters + rectWidth / 2, yFirstRound, xSemiFinals - rectWidth / 2, yFirstRound + 0.5 * ySpacing);
