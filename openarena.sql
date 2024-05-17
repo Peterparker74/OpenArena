@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 17, 2024 at 09:54 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Generation Time: May 17, 2024 at 12:33 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -29,12 +29,12 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `evenement` (
   `id_evenement` int(100) NOT NULL,
-  `nom_evenement` varchar(100) NOT NULL,
-  `modedejeux` varchar(100) NOT NULL,
-  `date_creation` date NOT NULL,
-  `date_debut` date NOT NULL,
-  `pseudo_createur` varchar(100) NOT NULL,
-  `photo_evenement` text NOT NULL DEFAULT ''
+  `nom_evenement` varchar(100) DEFAULT NULL,
+  `modedejeux` varchar(100) DEFAULT NULL,
+  `date_creation` date DEFAULT NULL,
+  `date_debut` date DEFAULT NULL,
+  `pseudo_createur` varchar(100) DEFAULT NULL,
+  `photo_evenement` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -56,9 +56,9 @@ INSERT INTO `evenement` (`id_evenement`, `nom_evenement`, `modedejeux`, `date_cr
 
 CREATE TABLE `map` (
   `id_map` int(100) NOT NULL,
-  `nom_map` varchar(100) NOT NULL,
-  `photo_map` text NOT NULL,
-  `description_map` text NOT NULL
+  `nom_map` varchar(100) DEFAULT NULL,
+  `photo_map` text DEFAULT NULL,
+  `description_map` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -87,12 +87,55 @@ INSERT INTO `map` (`id_map`, `nom_map`, `photo_map`, `description_map`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `matchs`
+--
+
+CREATE TABLE `matchs` (
+  `id_matchs` int(11) NOT NULL,
+  `id_tournoi` int(11) NOT NULL,
+  `phase` varchar(655) DEFAULT NULL,
+  `joueur1` varchar(655) DEFAULT NULL,
+  `joueur2` varchar(655) DEFAULT NULL,
+  `score_joueur1` int(11) DEFAULT NULL,
+  `score_joueur2` int(11) DEFAULT NULL,
+  `vainqueur` varchar(655) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `matchs`
+--
+
+INSERT INTO `matchs` (`id_matchs`, `id_tournoi`, `phase`, `joueur1`, `joueur2`, `score_joueur1`, `score_joueur2`, `vainqueur`) VALUES
+(23, 5, 'quart de finale', 'erw', 'clarisse_masson', 5, 4, 'erw'),
+(24, 5, 'quart de finale', 'eline', 'chancel_kotin1', 8, 2, 'eline'),
+(25, 5, 'quart de finale', 'eddy', 'chancel_kotin', 6, 1, 'eddy'),
+(26, 5, 'quart de finale', 'brown_chris', 'couffo_barack', 3, 2, 'brown_chris'),
+(27, 5, 'demi-finale', 'brown_chris', 'erw', 3, 2, 'brown_chris'),
+(28, 5, 'demi-finale', 'eddy', 'eline', 5, 4, 'eddy'),
+(29, 5, 'finale', 'eddy', 'brown_chris', 5, 1, 'eddy'),
+(30, 6, 'quart de finale', 'eddy', 'clarisse_masson', 5, 1, 'eddy'),
+(31, 6, 'quart de finale', 'chancel_kotin', 'eline', 4, 5, 'eline'),
+(32, 6, 'quart de finale', 'kerry_john', 'couffo_barack', 5, 2, 'kerry_john'),
+(33, 6, 'quart de finale', 'chancel_kotin1', 'erw', 8, 9, 'erw'),
+(34, 6, 'demi-finale', 'eline', 'kerry_john', 2, 1, 'eline'),
+(35, 6, 'demi-finale', 'erw', 'eddy', 5, 4, 'erw'),
+(36, 6, 'finale', 'eline', 'erw', 2, 1, 'eline'),
+(37, 7, 'quart de finale', 'eline', 'brown_chris', 2, 1, 'eline'),
+(38, 7, 'quart de finale', 'eddy', 'chancel_kotin1', 2, 1, 'eddy'),
+(39, 7, 'quart de finale', 'erw', 'couffo_barack', 3, 2, 'erw'),
+(40, 7, 'quart de finale', 'chancel_kotin', 'clarisse_masson', 2, 1, 'chancel_kotin'),
+(41, 7, 'demi-finale', 'eddy', 'erw', 3, 1, 'eddy'),
+(42, 7, 'demi-finale', 'eline', 'chancel_kotin', NULL, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `modes`
 --
 
 CREATE TABLE `modes` (
   `id_mode` int(11) NOT NULL,
-  `nom_mode` varchar(100) NOT NULL
+  `nom_mode` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -149,20 +192,102 @@ INSERT INTO `modes_maps` (`id_mode`, `id_map`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `participations`
+--
+
+CREATE TABLE `participations` (
+  `id_participations` int(11) NOT NULL,
+  `id_tournoi` int(11) NOT NULL,
+  `phase` varchar(655) DEFAULT NULL,
+  `joueurs` varchar(655) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `participations`
+--
+
+INSERT INTO `participations` (`id_participations`, `id_tournoi`, `phase`, `joueurs`) VALUES
+(46, 5, 'quart de finale', 'brown_chris'),
+(47, 5, 'quart de finale', 'chancel_kotin'),
+(48, 5, 'quart de finale', 'chancel_kotin1'),
+(49, 5, 'quart de finale', 'clarisse_masson'),
+(50, 5, 'quart de finale', 'couffo_barack'),
+(51, 5, 'quart de finale', 'eddy'),
+(52, 5, 'quart de finale', 'eline'),
+(53, 5, 'quart de finale', 'erw'),
+(54, 5, 'demi-finale', 'erw'),
+(55, 5, 'demi-finale', 'eline'),
+(56, 5, 'demi-finale', 'eddy'),
+(57, 5, 'demi-finale', 'brown_chris'),
+(58, 5, 'finale', 'brown_chris'),
+(59, 5, 'finale', 'eddy'),
+(60, 6, 'quart de finale', 'chancel_kotin'),
+(61, 6, 'quart de finale', 'chancel_kotin1'),
+(62, 6, 'quart de finale', 'clarisse_masson'),
+(63, 6, 'quart de finale', 'couffo_barack'),
+(64, 6, 'quart de finale', 'eddy'),
+(65, 6, 'quart de finale', 'eline'),
+(66, 6, 'quart de finale', 'erw'),
+(67, 6, 'quart de finale', 'kerry_john'),
+(68, 6, 'demi-finale', 'eddy'),
+(69, 6, 'demi-finale', 'eline'),
+(70, 6, 'demi-finale', 'kerry_john'),
+(71, 6, 'demi-finale', 'erw'),
+(72, 6, 'finale', 'eline'),
+(73, 6, 'finale', 'erw'),
+(74, 7, 'quart de finale', 'brown_chris'),
+(75, 7, 'quart de finale', 'chancel_kotin'),
+(76, 7, 'quart de finale', 'chancel_kotin1'),
+(77, 7, 'quart de finale', 'clarisse_masson'),
+(78, 7, 'quart de finale', 'couffo_barack'),
+(79, 7, 'quart de finale', 'eddy'),
+(80, 7, 'quart de finale', 'eline'),
+(81, 7, 'quart de finale', 'erw'),
+(82, 7, 'demi-finale', 'eline'),
+(83, 7, 'demi-finale', 'eddy'),
+(84, 7, 'demi-finale', 'erw'),
+(85, 7, 'demi-finale', 'chancel_kotin'),
+(86, 7, 'finale', 'eddy');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tournoi`
+--
+
+CREATE TABLE `tournoi` (
+  `id_tournoi` int(11) NOT NULL,
+  `nom_tournoi` varchar(655) DEFAULT NULL,
+  `date_tournoi` date DEFAULT NULL,
+  `vainqueur` varchar(655) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tournoi`
+--
+
+INSERT INTO `tournoi` (`id_tournoi`, `nom_tournoi`, `date_tournoi`, `vainqueur`) VALUES
+(5, 'comp', '2024-05-14', 'eddy'),
+(6, 'sq', '2024-05-13', 'eline'),
+(7, 'ki', '2024-05-24', NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `utilisateurs`
 --
 
 CREATE TABLE `utilisateurs` (
   `pseudo` varchar(100) NOT NULL,
-  `nom_utilisateur` varchar(100) NOT NULL,
-  `prenom` varchar(100) NOT NULL,
-  `adresse_email` varchar(100) NOT NULL,
-  `mot_de_passe` varchar(100) NOT NULL,
-  `type` varchar(100) NOT NULL,
+  `nom_utilisateur` varchar(100) DEFAULT NULL,
+  `prenom` varchar(100) DEFAULT NULL,
+  `adresse_email` varchar(100) DEFAULT NULL,
+  `mot_de_passe` varchar(100) DEFAULT NULL,
+  `type` varchar(100) DEFAULT NULL,
   `date_inscription` date DEFAULT NULL,
-  `ville` varchar(100) NOT NULL,
-  `sexe` varchar(100) NOT NULL,
-  `photo_de_profil` text NOT NULL
+  `ville` varchar(100) DEFAULT NULL,
+  `sexe` varchar(100) DEFAULT NULL,
+  `photo_de_profil` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -241,6 +366,13 @@ ALTER TABLE `map`
   ADD PRIMARY KEY (`id_map`);
 
 --
+-- Indexes for table `matchs`
+--
+ALTER TABLE `matchs`
+  ADD PRIMARY KEY (`id_matchs`),
+  ADD KEY `fk_id_tournoi_matchs` (`id_tournoi`);
+
+--
 -- Indexes for table `modes`
 --
 ALTER TABLE `modes`
@@ -252,6 +384,19 @@ ALTER TABLE `modes`
 ALTER TABLE `modes_maps`
   ADD PRIMARY KEY (`id_mode`,`id_map`),
   ADD KEY `id_map` (`id_map`);
+
+--
+-- Indexes for table `participations`
+--
+ALTER TABLE `participations`
+  ADD PRIMARY KEY (`id_participations`),
+  ADD KEY `fk_id_tournoi` (`id_tournoi`);
+
+--
+-- Indexes for table `tournoi`
+--
+ALTER TABLE `tournoi`
+  ADD PRIMARY KEY (`id_tournoi`);
 
 --
 -- Indexes for table `utilisateurs`
@@ -282,14 +427,38 @@ ALTER TABLE `map`
   MODIFY `id_map` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
+-- AUTO_INCREMENT for table `matchs`
+--
+ALTER TABLE `matchs`
+  MODIFY `id_matchs` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+
+--
 -- AUTO_INCREMENT for table `modes`
 --
 ALTER TABLE `modes`
   MODIFY `id_mode` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
+-- AUTO_INCREMENT for table `participations`
+--
+ALTER TABLE `participations`
+  MODIFY `id_participations` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
+
+--
+-- AUTO_INCREMENT for table `tournoi`
+--
+ALTER TABLE `tournoi`
+  MODIFY `id_tournoi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `matchs`
+--
+ALTER TABLE `matchs`
+  ADD CONSTRAINT `fk_id_tournoi_matchs` FOREIGN KEY (`id_tournoi`) REFERENCES `tournoi` (`id_tournoi`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `modes_maps`
@@ -297,6 +466,12 @@ ALTER TABLE `modes`
 ALTER TABLE `modes_maps`
   ADD CONSTRAINT `modes_maps_ibfk_1` FOREIGN KEY (`id_mode`) REFERENCES `modes` (`id_mode`),
   ADD CONSTRAINT `modes_maps_ibfk_2` FOREIGN KEY (`id_map`) REFERENCES `map` (`id_map`);
+
+--
+-- Constraints for table `participations`
+--
+ALTER TABLE `participations`
+  ADD CONSTRAINT `fk_id_tournoi` FOREIGN KEY (`id_tournoi`) REFERENCES `tournoi` (`id_tournoi`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
