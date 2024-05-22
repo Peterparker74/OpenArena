@@ -4,7 +4,7 @@ require("../requetes.php");
 
 session_start();
 	    
-verifierconnexionpersonne(); 
+verificationconnexionpersonne(); 
 ?>
 <!DOCTYPE html>
 <html lang="fr">

@@ -162,9 +162,11 @@
 
 
     <div style="height: 40px;background-color: blue;display: flex;align-items: center;">
-        <a href="../creerevenement/index.php"><button style="background: black;border: none;color: white;border-radius: white;height: 25px;border-radius: 5px;margin-left: 30px;">Définir un evenement</button></a>
-        <a href="index.php"><button style="background: black;border: none;color: white;border-radius: white;height: 25px;border-radius: 5px;margin-left: 30px;">Serveur Openarena</button></a>
-    </div>
+<a href="../creerevenement/index.php"><button style="background: black;border: none;color: white;border-radius: white;height: 25px;border-radius: 5px;margin-left: 30px;">Définir un evenement</button></a>
+<a href="index.php"><button style="background: black;border: none;color: white;border-radius: white;height: 25px;border-radius: 5px;margin-left: 30px;">Serveur Openarena</button></a>
+<a href="affichage.php"><button style="background: black;border: none;color: white;border-radius: white;height: 25px;border-radius: 5px;margin-left: 30px;">Tournois</button></a>
+<a href="competition.php"><button style="background: black;border: none;color: white;border-radius: white;height: 25px;border-radius: 5px;margin-left: 30px;">Créer tournoi</button></a>
+</div>
 
     <h1>Contrôle du serveur OpenArena</h1>
     <form action="script.php" method="post">

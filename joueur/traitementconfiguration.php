@@ -9,7 +9,7 @@ require("../requetes.php");
 
 session_start();
 
-verifierconnexionpersonne();
+verificationconnexionpersonne();
 use \phpseclib3\Net\SSH2;
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -62,6 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 
 
             echo "Données enregistrées avec succès dans le fichier.";
+ 
 	    header('Location: configurationcommandesucces.php');
 	    $ssh->exec("sudo printf $data > $filePath");
 	} else{

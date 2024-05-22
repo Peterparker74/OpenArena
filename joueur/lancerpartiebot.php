@@ -8,7 +8,7 @@
 
 	session_start();
 
-	verifierconnexionpersonne();
+	verificationconnexionpersonne();
 
 	include '../vendor/autoload.php';
 
