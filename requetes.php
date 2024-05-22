@@ -116,7 +116,7 @@ function mafficher()
 	{
 		if (require("config.php")) {
 			$update=$bdd->prepare("UPDATE utilisateurs SET avancer=?, reculer=?, tourner_gauche=?, tourner_droite=?, sauter=?, tirer=? WHERE pseudo= ?; ") ;					
-									$update->execute(array('bind '.$avancer.'" +forward"','bind '.$reculer.'"+back"','bind '.$tournergauche.'" +left"','bind '.$tournerdroite.'" +right"','bind '.$sauter.'" +moveup"','bind '.$tirer.'" +attack"',$_SESSION['pseudo']));
+									$update->execute(array($avancer,$reculer,$tournergauche,$tournerdroite,$sauter,$tirer,$_SESSION['pseudo']));
 		}
 	}
 
