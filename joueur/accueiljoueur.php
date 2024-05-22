@@ -4,7 +4,7 @@
 
     session_start();
     
-    verifierconnexionpersonne();
+    verificationconnexionpersonne();
 
 ?>
 <!DOCTYPE html>
@@ -18,6 +18,7 @@
     <link rel="stylesheet" type="text/javascript" href="../admin/accueil/script/script.js">
 </head>
 <body style="height: 100%;width: 100%;margin: 0;padding: 0;">
+
 
     <div>Accueil joueur</div>
 </body>

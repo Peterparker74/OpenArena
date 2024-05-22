@@ -1,11 +1,11 @@
 <?php
-	/*ini_set('display_errors', 1);
+	ini_set('display_errors', 1);
 	error_reporting(E_ALL);
 	require_once '../config.php'; // On inclu la connexion à la bdd
-        require("../requetes.php");
+    require("../requetes.php");
+    session_start(); 
     
-        verifierconnexionpersonne(); */
-	session_start(); 
+    verificationconnexionpersonne(); 
 	ini_set('display_errors', 1);
 	error_reporting(E_ALL);
 
