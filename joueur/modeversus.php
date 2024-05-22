@@ -2,11 +2,11 @@
 
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
-/*require_once '../config.php'; // On inclu la connexion à la bdd
+require_once '../config.php'; // On inclu la connexion à la bdd
 require("../requetes.php");
-    
-verifierconnexionpersonne(); */
 session_start(); 
+    
+verificationconnexionpersonne(); 
 
 include '../vendor/autoload.php';
 

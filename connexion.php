@@ -35,7 +35,7 @@
                         die();
                     }
                     else if($typeutilisateur=='organisateur'){
-                        header('Location: organisateur/index.php');
+                        header('Location: organisateur/accueil/index.php');
                         die();
 
                     }

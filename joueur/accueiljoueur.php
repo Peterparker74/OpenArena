@@ -4,7 +4,7 @@
 
     session_start();
     
-    verifierconnexionpersonne();
+    verificationconnexionpersonne();
 
 ?>
 <!DOCTYPE html>
@@ -43,7 +43,7 @@
     <div style="height: 20px;background-color: rgb(60, 179, 113);font-style: italic;font-size: 14px;padding: 2px 0 2px 20px;color: white;">Vous etes connecté en tant que joueur</div>
 
     <div style="display: flex;justify-content: center;margin-bottom: 50px;position: absolute;bottom: 100px;width: 100%;">
-            <a href="authentification.php"><button type="submit" style="background-color: green;border: none;color: white;border-radius: 3px;margin-right: 25px;font-size: 16px;padding: 2px 5px 2 px 5px;">Aller au gestionnaire<br> des taches</button></a>
+            <a href="menu.php"><button type="submit" style="background-color: green;border: none;color: white;border-radius: 3px;margin-right: 25px;font-size: 16px;padding: 2px 5px 2 px 5px;">Aller au gestionnaire<br> des taches</button></a>
 
     </div>
 

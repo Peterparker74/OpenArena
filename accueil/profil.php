@@ -1,3 +1,9 @@
+<?php
+    require_once '../config.php'; // On inclu la connexion à la bdd
+    require("../requetes.php");
+    session_start();
+    $mafficher = mafficher();
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -26,8 +32,10 @@
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="informations" role="tabpanel" aria-labelledby="informations-tab">
                 <h2 class="mt-4">Mes Informations</h2>
-                <p>Bienvenue, <?php echo $_SESSION['username']; ?> !</p>
+                <p>Bienvenue, <?= $_SESSION['pseudo']; ?> !</p>
             </div>
+            <?php foreach ($mafficher as $unmafficher) :?>
+            
             <div class="tab-pane fade" id="commandes" role="tabpanel" aria-labelledby="commandes-tab">
                 <h2 class="mt-4">Mes Commandes</h2>
                 <form action="" method="post">
@@ -43,32 +51,32 @@
                             <tbody>
                                 <tr>
                                     <td>Avancer</td>
-                                    <td><?php echo $_SESSION['commands']['avancer']; ?></td>
+                                    <td><?= $unmafficher->avancer ?></td>
                                     <td><input type="text" class="form-control new-command" name="avancer" placeholder="Nouvelle commande"></td>
                                 </tr>
                                 <tr>
                                     <td>Reculer</td>
-                                    <td><?php echo $_SESSION['commands']['reculer']; ?></td>
+                                    <td><?= $unmafficher->reculer ?></td>
                                     <td><input type="text" class="form-control new-command" name="reculer" placeholder="Nouvelle commande"></td>
                                 </tr>
                                 <tr>
                                     <td>Aller à gauche</td>
-                                    <td><?php echo $_SESSION['commands']['gauche']; ?></td>
+                                    <td><?= $unmafficher->tourner_gauche ?></td>
                                     <td><input type="text" class="form-control new-command" name="gauche" placeholder="Nouvelle commande"></td>
                                 </tr>
                                 <tr>
                                     <td>Aller à droite</td>
-                                    <td><?php echo $_SESSION['commands']['droite']; ?></td>
+                                    <td><?= $unmafficher->tourner_droite ?></td>
                                     <td><input type="text" class="form-control new-command" name="droite" placeholder="Nouvelle commande"></td>
                                 </tr>
                                 <tr>
                                     <td>Sauter</td>
-                                    <td><?php echo $_SESSION['commands']['sauter']; ?></td>
+                                    <td><?= $unmafficher->sauter ?></td>
                                     <td><input type="text" class="form-control new-command" name="sauter" placeholder="Nouvelle commande"></td>
                                 </tr>
                                 <tr>
                                     <td>Tirer</td>
-                                    <td><?php echo $_SESSION['commands']['tirer']; ?></td>
+                                    <td><?= $unmafficher->tirer ?></td>
                                     <td><input type="text" class="form-control new-command" name="tirer" placeholder="Nouvelle commande"></td>
                                 </tr>
                             </tbody>
@@ -77,6 +85,7 @@
                     <button type="submit" class="btn btn-primary">Enregistrer</button>
                 </form>
             </div>
+           <?php endforeach ; ?>
             <div class="tab-pane fade" id="scores" role="tabpanel" aria-labelledby="scores-tab">
                 <h2 class="mt-4">Mes Scores</h2>
                 <table class="table mt-3">
