@@ -310,7 +310,7 @@ form.scoreForm input[type="submit"]:hover {
         }
         
         echo '<li>' . $match['joueur1'] . ' VS ' . $match['joueur2'] . ' ';
-        echo '<button style="background-color: green;" class="lancerOpenArenaBtn">Lancer la partie</button>';
+        echo '<button style="background-color: green;" class="lancerOpenArenaBtn" data-joueur1="' . $match['joueur1'] . '" data-joueur2="' . $match['joueur2'] . '">Lancer la partie</button>';
         if($match['score_joueur1']!=0 || $match['score_joueur2']!=0)
             echo 'Résultats: '.$match['score_joueur1'].'-'.$match['score_joueur2'];
         else{
@@ -343,11 +343,19 @@ var lancerBtns = document.getElementsByClassName("lancerOpenArenaBtn");
 // Ajouter le gestionnaire d'événements à chaque bouton
 for (var i = 0; i < lancerBtns.length; i++) {
     lancerBtns[i].addEventListener("click", function(){
-        var xhr1 = new XMLHttpRequest();
-        xhr1.open("GET", "http://195.221.40.1:5000/lancer_openarena", true); 
+        var joueur1 = this.getAttribute('data-joueur1');
+        var joueur2 = this.getAttribute('data-joueur2');
+
+        alert("Lancement du jeu pour:\nRaspberry 1: " + joueur1 + "\nJRaspberry 2: " + joueur2);
+
+        var params1 = "joueur=" + encodeURIComponent(joueur1);
+        var params2 = "joueur=" + encodeURIComponent(joueur2);
+
+       var xhr1 = new XMLHttpRequest();
+        xhr1.open("GET", "http://195.221.40.1:5000/lancer_openarena?" +params1 , true); 
         xhr1.send();
         xhr2 = new XMLHttpRequest();
-        xhr2.open("GET", "http://195.221.40.2:5000/lancer_openarena", true); 
+        xhr2.open("GET", "http://195.221.40.2:5000/lancer_openarena?" +params2, true); 
         xhr2.send();
     });
 }
