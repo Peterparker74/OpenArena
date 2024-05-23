@@ -31,22 +31,22 @@
 
 
                     if($typeutilisateur=='admin'){
-                        header('Location: admin/accueil/index.php');
+                        header('Location: /OpenArena/admin/accueil/index.php');
                         die();
                     }
                     else if($typeutilisateur=='organisateur'){
-                        header('Location: organisateur/index.php');
+                        header('Location: /OpenArena/organisateur/accueil/index.php');
                         die();
 
                     }
                     else if($typeutilisateur=='personne'){
-                        header('Location: accueil/accueil.php');
+                        header('Location: /OpenArena/joueur/accueiljoueur.php');
                         die();
 
                     }
                 }else{ header('Location: index.php?login_err=password'); die(); }
             
-        }else{ header('Location: index.php?login_err=already'); die(); }
-    }else{ header('Location: index.php'); die();} // si le formulaire est envoyé sans aucune données
+        }else{ header('Location: /OpenArena/index.php?login_err=already'); die(); }
+    }else{ header('Location: /OpenArena/index.php'); die();} // si le formulaire est envoyé sans aucune données
 ?>
 

@@ -6,10 +6,10 @@
             <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
             <meta name="author" content="NoS1gnal"/>
             <link rel="stylesheet" type="text/javascript" src="jquery-3.7.0.js">
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
             <link rel="preconnect" href="https://fonts.googleapis.com">
             <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-            <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@1,700&family=Merriweather&family=Roboto:ital,wght@0,700;1,300&display=swap" rel="stylesheet">
+            <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@1,700&family=Merriweather&family=Roboto:ital,wght@0,700;1,300&display=swap" rel="stylesheet">-->
             <title>Connexion</title>
         </head>
         <body id="swup" class="transition-fade" style="height: 100%;width: 100%;position: relative;margin: 0;padding: 0;background-image: url('https://png.pngtree.com/background/20210715/original/pngtree-yellow-gradient-simplified-background-picture-image_1277937.jpg');">

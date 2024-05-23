@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 17, 2024 at 12:33 AM
+-- Generation Time: May 23, 2024 at 12:08 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -287,39 +287,46 @@ CREATE TABLE `utilisateurs` (
   `date_inscription` date DEFAULT NULL,
   `ville` varchar(100) DEFAULT NULL,
   `sexe` varchar(100) DEFAULT NULL,
-  `photo_de_profil` text DEFAULT NULL
+  `photo_de_profil` text DEFAULT NULL,
+  `avancer` text DEFAULT NULL,
+  `reculer` text DEFAULT NULL,
+  `tourner_gauche` text DEFAULT NULL,
+  `tourner_droite` text DEFAULT NULL,
+  `sauter` text DEFAULT NULL,
+  `tirer` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `utilisateurs`
 --
 
-INSERT INTO `utilisateurs` (`pseudo`, `nom_utilisateur`, `prenom`, `adresse_email`, `mot_de_passe`, `type`, `date_inscription`, `ville`, `sexe`, `photo_de_profil`) VALUES
-('admin', 'Admin', '', 'admin@gmail.com', '$2y$12$owtMcgvqCt3TLyhiYjpYEupePSf6/Xl9a9x6kqYDIOz2fIFpin2c2', 'admin', NULL, 'fr', 'Masculin', 'uploads/photoprofilhomme.jpg'),
-('brown_chris', 'chris', 'brown', 'brown.chris@open-arena.fr', '$2y$12$4US25qM46xcr62Q1KyNdBehf9OHloei./oTJGYilL3AbVciMPeCAG', 'personne', '2024-04-14', 'fr', 'Masculin', 'uploads/photoprofilhomme.jpg'),
-('chancel_kotin', 'kotin', 'chancel', 'chancel.kotin@open-arena.fr', '$2y$12$cU5kAhxnarkpQrSkxSGlOekghZzqQDijMcA6YENnONfHFp5chpUWO', 'personne', '2024-04-17', 'fr', 'Masculin', ''),
-('chancel_kotin1', 'KOTIN', 'Chancel', 'chancel.kotin@open-arena.fr', '$2y$12$qL59GRe5NschmU3bef8oFe1SrXZd2eLwoi/rxc3ZX7k8auv1PdTpi', 'personne', '2024-04-17', 'fr', 'Masculin', ''),
-('clarisse_masson', 'masson', 'clarisse', 'clarisse.masson@open-arena.fr', '$2y$12$iun.F4YyoTfEk9tgKt9ReezsmXct7IyMu4RkKQ39AVYhDCZ4zdRmm', 'personne', '2024-04-17', 'fr', 'Féminin', ''),
-('couffo_barack', 'barack', '', 'couffo.barack@open-arena.fr', '$2y$12$DEJ.H/I9u9EV5bft2UP5sOkVif0zzrabhKRmDTRQ5e2QkPCBcxooO', 'organisateur', NULL, '', '', ''),
-('eddy', 'Eddy', '', 'eddy@gmail.com', '$2y$12$XnRDwd6y7IpqDG73hb33ROCGrlfftFPLwL6hGaLei9pYoHD5FSLiy', 'personne', NULL, '', '', ''),
-('eline', 'eline', '', 'eline@gmail.com', '$2y$12$AxBxwTRqY99S/xprSLtLbePr7KVdaF3NwnZNuCQyObwVHt/32yUam', 'personne', NULL, 'fr', 'Féminin', 'uploads/photoprofilfemme.jpg'),
-('erw', 'Erw', '', 'didymedide0808@gmail.com', '$2y$12$28F.jWKXR9m5chO16e8Jx.nDKOAFoXm8b/s09e6Vs9nU6uK67M9W6', 'personne', NULL, 'fr', 'Masculin', 'uploads/1Capture d’écran 2022-03-25 092343.png'),
-('kerry_john', 'john', '', 'kerry.@open-arena.fr', '$2y$12$6E2CGg6LY1CnWWV4P.JJR.irw6H1MzDP6OaBXkpTha58OQU6aN.ha', 'organisateur', NULL, '', '', ''),
-('marion_guionnet', 'guionnet', 'marion', 'marion.guionnet@open-arena.fr', '$2y$12$xfsyxoFZVORQZW80QDBu1er09zW4dfFul.Xs2xhGeSD2AT8JoCZ2K', 'personne', '2024-04-15', 'fr', 'Féminin', ''),
-('moiadmin', 'MoiAdmin', '', 'moiadmin@gmail.com', '$2y$12$NwRfktT2DX7LsmnYIAp3buhwMDpRQ.4uRNBtvyDjnwzI1NbX73Die', 'organisateur', NULL, '', '', ''),
-('musk_elon', 'Elon', 'Musk', 'musk.elon@open-arena.fr', '$2y$12$lwRPZGkBn2lQcO3610EKNeerWueqf6A85G0fH5TL9uTNY2gvdNOqq', 'personne', '2024-04-14', 'fr', 'Masculin', ''),
-('organisateur_1', 'Organisateur1', '', 'organisateur1@gmail.com', '$2y$12$g82VD2qCqX7k/A0ypfittOI/YIhNTnCUtM/7jSzomRVfnKfZ2k3sK', 'organisateur', NULL, '', '', ''),
-('organisateur_2', 'Organisateur2', '', 'organisateur2@gmail.com', '$2y$12$F5hGAMZMgdkgaYh0S0e3PuY7b1mcs582UjLGKriuSEJNWWW6LvEbu', 'organisateur', NULL, '', '', ''),
-('organisateur_3', 'Organisateur3', '', 'organisateur3@gmail.com', '$2y$12$q3P3L3UHUxbuv1nmXnMyM.qXEFZ5oVZfusWEjw9tZvh/Am7lVbVey', 'organisateur', NULL, '', '', ''),
-('organisateur_4', 'Organisateur4', '', 'organisateur4@gmail.com', '$2y$12$uIlwz5p1dwsB5TT/.JxHO.kEqOG3PEJ4QS5NrGBXGXRy43CHJnx32', 'organisateur', NULL, '', '', ''),
-('organisateur_5', 'Organisateur5', '', 'organisateur5@gmail.com', '$2y$12$j4KKaMf5RgXIYcMbPZAvUOmxmRVza/VYcGeqjvmLABDkg8dbpzh3K', 'organisateur', NULL, '', '', ''),
-('organisateur_6', 'Organisateur6', '', 'organisateur6@gmail.com', '$2y$12$bceYtX32wpAkPsjGUHNMFuF5it0Y1rrESIcHOcNO9ZCWAf2yfqW6y', 'organisateur', NULL, '', '', ''),
-('organisateur_7', 'Organisateur7', '', 'organisateur7@gmail.com', '$2y$12$2uM5EyY/8pTerPFg3LhOWOUvyJS9AWnJJr5ZMGW.1n9EIQpftks2O', 'organisateur', NULL, '', '', ''),
-('organisateur_8', 'Organisateur8', '', 'organisateur8@gmail.com', '$2y$12$7Li3CK3oUZSVOFQ.3j93HOvUS/bBhU84zRDvPyXDzcBvU9zyPwqhG', 'organisateur', NULL, '', '', ''),
-('organisateur_9', 'Organisateur9', '', 'organisateur9@gmail.com', '$2y$12$0xKSipL9S3PSsJYqHLV0PO5ZT3dzejL4..3OsPT.95bZj5IvP.gHq', 'organisateur', NULL, '', '', ''),
-('rosay_boss', 'boss', 'rosay', 'rosay.boss@open-arena.fr', '$2y$12$Pn.ZodzbDLmz3g3mnjQ2tOg6UEXbaVfszt8s2MMRHIupgDwgC6wNC', 'personne', '2024-04-14', 'fr', 'Masculin', ''),
-('thug', 'thug', '', 'thug@gmail.com', '$2y$12$O.IwadjLbWZA2e/AVaA1bOSp5wi5Sm8r7iMIQVqpkTbgGBBhoG9Ru', 'personne', NULL, 'es', 'Masculin', 'uploads/photoprofilhomme.jpg'),
-('tom_Jerry', 'Jerry', '', 'tom.@open-arena.fr', '$2y$12$iG12UnPpoTFRMtBBWOpGUOIJ26Hh0.J/1MVhGL8Cv6PMQ6RuFSU62', 'organisateur', NULL, '', '', '');
+INSERT INTO `utilisateurs` (`pseudo`, `nom_utilisateur`, `prenom`, `adresse_email`, `mot_de_passe`, `type`, `date_inscription`, `ville`, `sexe`, `photo_de_profil`, `avancer`, `reculer`, `tourner_gauche`, `tourner_droite`, `sauter`, `tirer`) VALUES
+('admin', 'Admin', '', 'admin@gmail.com', '$2y$12$owtMcgvqCt3TLyhiYjpYEupePSf6/Xl9a9x6kqYDIOz2fIFpin2c2', 'admin', NULL, 'fr', 'Masculin', 'uploads/photoprofilhomme.jpg', NULL, NULL, NULL, NULL, NULL, NULL),
+('brown_chris', 'chris', 'brown', 'brown.chris@open-arena.fr', '$2y$12$4US25qM46xcr62Q1KyNdBehf9OHloei./oTJGYilL3AbVciMPeCAG', 'personne', '2024-04-14', 'fr', 'Masculin', 'uploads/photoprofilhomme.jpg', NULL, NULL, NULL, NULL, NULL, NULL),
+('chancel_kotin', 'kotin', 'chancel', 'chancel.kotin@open-arena.fr', '$2y$12$cU5kAhxnarkpQrSkxSGlOekghZzqQDijMcA6YENnONfHFp5chpUWO', 'personne', '2024-04-17', 'fr', 'Masculin', '', NULL, NULL, NULL, NULL, NULL, NULL),
+('chancel_kotin1', 'KOTIN', 'Chancel', 'chancel.kotin@open-arena.fr', '$2y$12$qL59GRe5NschmU3bef8oFe1SrXZd2eLwoi/rxc3ZX7k8auv1PdTpi', 'personne', '2024-04-17', 'fr', 'Masculin', '', NULL, NULL, NULL, NULL, NULL, NULL),
+('clarisse_masson', 'masson', 'clarisse', 'clarisse.masson@open-arena.fr', '$2y$12$iun.F4YyoTfEk9tgKt9ReezsmXct7IyMu4RkKQ39AVYhDCZ4zdRmm', 'personne', '2024-04-17', 'fr', 'Féminin', '', NULL, NULL, NULL, NULL, NULL, NULL),
+('couffo_barack', 'barack', '', 'couffo.barack@open-arena.fr', '$2y$12$DEJ.H/I9u9EV5bft2UP5sOkVif0zzrabhKRmDTRQ5e2QkPCBcxooO', 'organisateur', NULL, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL),
+('eddy', 'Eddy', '', 'eddy@gmail.com', '$2y$12$XnRDwd6y7IpqDG73hb33ROCGrlfftFPLwL6hGaLei9pYoHD5FSLiy', 'personne', NULL, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL),
+('eline', 'eline', '', 'eline@gmail.com', '$2y$12$AxBxwTRqY99S/xprSLtLbePr7KVdaF3NwnZNuCQyObwVHt/32yUam', 'personne', NULL, 'fr', 'Féminin', 'uploads/photoprofilfemme.jpg', NULL, NULL, NULL, NULL, NULL, NULL),
+('erw', 'Erw', '', 'didymedide0808@gmail.com', '$2y$12$28F.jWKXR9m5chO16e8Jx.nDKOAFoXm8b/s09e6Vs9nU6uK67M9W6', 'personne', NULL, 'fr', 'Masculin', 'uploads/1Capture d’écran 2022-03-25 092343.png', 'G', 'B', 'V', 'C', 'X', 'W'),
+('kerry_john', 'john', '', 'kerry.@open-arena.fr', '$2y$12$6E2CGg6LY1CnWWV4P.JJR.irw6H1MzDP6OaBXkpTha58OQU6aN.ha', 'organisateur', NULL, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL),
+('marion_guionnet', 'guionnet', 'marion', 'marion.guionnet@open-arena.fr', '$2y$12$xfsyxoFZVORQZW80QDBu1er09zW4dfFul.Xs2xhGeSD2AT8JoCZ2K', 'personne', '2024-04-15', 'fr', 'Féminin', '', NULL, NULL, NULL, NULL, NULL, NULL),
+('moiadmin', 'MoiAdmin', '', 'moiadmin@gmail.com', '$2y$12$NwRfktT2DX7LsmnYIAp3buhwMDpRQ.4uRNBtvyDjnwzI1NbX73Die', 'organisateur', NULL, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL),
+('musk_elon', 'Elon', 'Musk', 'musk.elon@open-arena.fr', '$2y$12$lwRPZGkBn2lQcO3610EKNeerWueqf6A85G0fH5TL9uTNY2gvdNOqq', 'personne', '2024-04-14', 'fr', 'Masculin', '', NULL, NULL, NULL, NULL, NULL, NULL),
+('organisateur_1', 'Organisateur1', '', 'organisateur1@gmail.com', '$2y$12$g82VD2qCqX7k/A0ypfittOI/YIhNTnCUtM/7jSzomRVfnKfZ2k3sK', 'organisateur', NULL, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL),
+('organisateur_2', 'Organisateur2', '', 'organisateur2@gmail.com', '$2y$12$F5hGAMZMgdkgaYh0S0e3PuY7b1mcs582UjLGKriuSEJNWWW6LvEbu', 'organisateur', NULL, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL),
+('organisateur_3', 'Organisateur3', '', 'organisateur3@gmail.com', '$2y$12$q3P3L3UHUxbuv1nmXnMyM.qXEFZ5oVZfusWEjw9tZvh/Am7lVbVey', 'organisateur', NULL, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL),
+('organisateur_4', 'Organisateur4', '', 'organisateur4@gmail.com', '$2y$12$uIlwz5p1dwsB5TT/.JxHO.kEqOG3PEJ4QS5NrGBXGXRy43CHJnx32', 'organisateur', NULL, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL),
+('organisateur_5', 'Organisateur5', '', 'organisateur5@gmail.com', '$2y$12$j4KKaMf5RgXIYcMbPZAvUOmxmRVza/VYcGeqjvmLABDkg8dbpzh3K', 'organisateur', NULL, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL),
+('organisateur_6', 'Organisateur6', '', 'organisateur6@gmail.com', '$2y$12$bceYtX32wpAkPsjGUHNMFuF5it0Y1rrESIcHOcNO9ZCWAf2yfqW6y', 'organisateur', NULL, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL),
+('organisateur_7', 'Organisateur7', '', 'organisateur7@gmail.com', '$2y$12$2uM5EyY/8pTerPFg3LhOWOUvyJS9AWnJJr5ZMGW.1n9EIQpftks2O', 'organisateur', NULL, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL),
+('organisateur_8', 'Organisateur8', '', 'organisateur8@gmail.com', '$2y$12$7Li3CK3oUZSVOFQ.3j93HOvUS/bBhU84zRDvPyXDzcBvU9zyPwqhG', 'organisateur', NULL, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL),
+('organisateur_9', 'Organisateur9', '', 'organisateur9@gmail.com', '$2y$12$0xKSipL9S3PSsJYqHLV0PO5ZT3dzejL4..3OsPT.95bZj5IvP.gHq', 'organisateur', NULL, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL),
+('rosay_boss', 'boss', 'rosay', 'rosay.boss@open-arena.fr', '$2y$12$Pn.ZodzbDLmz3g3mnjQ2tOg6UEXbaVfszt8s2MMRHIupgDwgC6wNC', 'personne', '2024-04-14', 'fr', 'Masculin', '', NULL, NULL, NULL, NULL, NULL, NULL),
+('sd_sd', 'sd', 'sd', 'sd.sd@open-arena.fr', '$2y$12$PjA3bN/N20ZkPsfRdJJC7.SuZJmeEvd2BZa/VTONO4q.Zp.KWFDIG', 'personne', '2024-05-22', 'fr', 'Masculin', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('thug', 'thug', '', 'thug@gmail.com', '$2y$12$O.IwadjLbWZA2e/AVaA1bOSp5wi5Sm8r7iMIQVqpkTbgGBBhoG9Ru', 'personne', NULL, 'es', 'Masculin', 'uploads/photoprofilhomme.jpg', NULL, NULL, NULL, NULL, NULL, NULL),
+('tom_Jerry', 'Jerry', '', 'tom.@open-arena.fr', '$2y$12$iG12UnPpoTFRMtBBWOpGUOIJ26Hh0.J/1MVhGL8Cv6PMQ6RuFSU62', 'organisateur', NULL, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 

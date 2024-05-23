@@ -169,78 +169,32 @@
 <a href="competition.php"><button style="background: black;border: none;color: white;border-radius: white;height: 25px;border-radius: 5px;margin-left: 30px;">Créer tournoi</button></a>
 </div>
 
-    <h1>Contrôle du serveur OpenArena</h1>
+    <h1>Status des serveurs</h1>
     <form action="script.php" method="post">
-        <?php
-        // Statut du serveur (démarré ou arrêté)
-        
-            $server_status = "";
-            // Connexion au serveur distant
-            $connection = ssh2_connect('195.221.40.129', 22);
-            if (!$connection) {
-                echo "Échec de la connexion au serveur";
-                exit;
-            } else {
-                echo "Connexion au serveur réussie<br>";
-            }
+    <?php
+// Liste des serveurs avec leurs adresses IP et noms
+$servers = [
+    '195.221.50.25' => 'ROUEN',
+    '195.221.20.27' => 'MONTCUQ',
+    '195.221.30.65' => 'MONACO'
+];
 
-           
+function pingServer($ip) {
+    // Envoi de 4 paquets ICMP avec un délai de 1 seconde entre les pings
+    exec("ping -c 4 -W 1 $ip", $output, $status);
 
+    if ($status === 0) {
+        return "Actif";
+    } else {
+        return "Inactif";
+    }
+}
 
-            // Authentification
-            if (!ssh2_auth_password($connection, 'rt', 'rt')) {
-                echo "Échec de l'authentification";
-                exit;
-            } else {
-                echo "Authentification réussie<br>";
-            }
-
-             //Exécution de la commande
-             $stream = ssh2_exec($connection, 'sudo /usr/bin/systemctl status openarena-server');
-             stream_set_blocking($stream, true);
-             $stream_out = ssh2_fetch_stream($stream, SSH2_STREAM_STDIO);
-             $output = stream_get_contents($stream_out);
-
-            // Vérification si le service est actif
-            if (strpos($output, 'Active: active') !== false) {
-                $server_status = "Actif";
-            } 
-            // Vérification si le service est en échec
-            elseif (strpos($output, 'Active: failed') !== false) {
-                $server_status = "Inactif";
-            } 
-            // Si aucun des deux états n'est trouvé, le statut n'est pas clair
-            else {
-                $server_status = "Le statut du serveur n'est pas clair";
-            }
-
-            
-
-
-        // Afficher le statut du serveur
-       
-        echo "<p>Statut du serveur : $server_status</p>";
-
-        // Désactiver le bouton "Démarrer serveur" si le serveur est déjà démarré
-        if ($server_status === "Actif") {
-            echo '<button type="submit" name="start" class="start" disabled>Démarrer serveur</button>';
-            //echo '<button  disabled >Ajouter des bots</button>';
-        } else {
-            echo '<button type="submit" name="start" class="start">Démarrer serveur</button>';
-            //echo '<button   >Ajouter des bots</button>';
-            
-            
-        }
-
-        //Désactiver le bouton "Arrêter serveur" si le serveur est déjà arrêté
-        if ($server_status === "Inactif") {
-           
-            echo '<button type="submit" name="stop" class="stop" disabled>Arrêter serveur</button>'; 
-        } else {
-            echo '<a href="ajouterbots.php"  style="color: inherit; text-decoration: none;" >Ajouter des bots</a>';
-            echo '<button type="submit" name="stop" class="stop">Arrêter serveur</button>';
-        }
-        ?>
+foreach ($servers as $ip => $name) {
+    $status = pingServer($ip);
+    echo "<p>$name ($ip) : $status</p>";
+}
+?>
     </form>
 
     <!-- Lien vers votre fichier JavaScript externe (facultatif) -->
@@ -248,4 +202,3 @@
     <script type="text/javascript" src="../../jquery-3.7.0.js"></script>
 </body>
 </html>
-

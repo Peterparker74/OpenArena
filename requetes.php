@@ -10,7 +10,7 @@ function verificationconnexionpersonne()
         $result = $sql->fetch()['type'];
 
 		if(!isset($_SESSION['pseudo']) | empty($_SESSION['pseudo']) | $result!="personne"){
-		    header('Location:/openarena/accueil/accueil.php');
+		    header('Location:/OpenArena/index.php');
 		    die();
 		}
 		else{
@@ -37,7 +37,7 @@ function verifierconnexionorganisateur()
         $result = $sql->fetch()['type'];
 
 		if(!isset($_SESSION['pseudo']) | empty($_SESSION['pseudo']) | $result!="organisateur"){
-		    header('Location:/openarena/accueil/accueil.php');
+		    header('Location:/OpenArena/index.php');
 		    die();
 		}
 		else{
@@ -83,20 +83,21 @@ function verifierconnexionadmin()
 
 function mafficher()
 {
+    require("config.php");
 
-	if (require("config.php")) {
-
-		$sql = $bdd->prepare("SELECT * FROM personne WHERE pseudo = :pseudo");
+    if ($bdd) {
+        $sql = $bdd->prepare("SELECT * FROM utilisateurs WHERE pseudo = :pseudo");
         $pseudo = $_SESSION['pseudo'];
         $sql->bindParam(':pseudo', $pseudo, PDO::PARAM_STR);
         $sql->execute();
-        $result = $sql->fetch(PDO::FETCH_OBJ);
-        $sql->closeCursor();
+        $result = $sql->fetchAll(PDO::FETCH_OBJ); // Fetch all results as an array of objects
         return $result;
+        $sql->closeCursor();
+    }
 
-	}
-
+    return false; // Return false if connection fails or $bdd is not defined
 }
+
 
 	function affichertouslesjoueurs()
 	{
@@ -109,6 +110,14 @@ function mafficher()
 		
 	}
 
+	}
+
+	function ajoutercommandesbdd($avancer, $reculer, $tournergauche, $tournerdroite, $sauter, $tirer)
+	{
+		if (require("config.php")) {
+			$update=$bdd->prepare("UPDATE utilisateurs SET avancer=?, reculer=?, tourner_gauche=?, tourner_droite=?, sauter=?, tirer=? WHERE pseudo= ?; ") ;					
+									$update->execute(array($avancer,$reculer,$tournergauche,$tournerdroite,$sauter,$tirer,$_SESSION['pseudo']));
+		}
 	}
 
 	

@@ -2,7 +2,25 @@
     require_once '../config.php'; // On inclu la connexion à la bdd
     require("../requetes.php");
     session_start();
+    verificationconnexionpersonne();
     $mafficher = mafficher();
+
+    if (isset($_POST['avancer'])) {
+        $inputs = [
+            $_POST['avancer'],
+            $_POST['reculer'],
+            $_POST['gauche'],
+            $_POST['droite'],
+            $_POST['sauter'],
+            $_POST['tirer']
+        ];
+        if (count($inputs) == count(array_unique($inputs))) {
+            ajoutercommandesbdd($_POST['avancer'],$_POST['reculer'],$_POST['gauche'],$_POST['droite'],$_POST['sauter'],$_POST['tirer']);
+        }else{
+
+        }
+
+    }
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -13,6 +31,15 @@
     <link rel="stylesheet" href="../bootstrap-5.3.3-dist/css/bootstrap.min.css">
 </head>
 <body>
+
+    <?php if (isset($_POST['avancer'])) { ?>
+        <?php if (isset($_POST['avancer']) && count($inputs) == count(array_unique($inputs))) { ?>
+        <div style="width: 80%;height: 80px;background-color: green;color: white;text-align: center;margin-left: auto;margin-right: auto;">Vos commandes ont été configurés avec succès</div>
+    <?php }else{ ?>
+        <div style="width: 80%;height: 80px;background-color: red;color: white;text-align: center;margin-left: auto;margin-right: auto;">Il semblerait que certaines commandes sont dupliqués. Veuillez réessayer.</div>
+    <?php } ?>
+    <?php } ?>
+
     <div class="container mt-5">
         <h1 class="text-center mb-5">Profil du Joueur</h1>
         <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -26,7 +53,7 @@
                 <button class="nav-link" id="scores-tab" data-bs-toggle="tab" data-bs-target="#scores" type="button" role="tab" aria-controls="scores" aria-selected="false">Mes Scores</button>
             </li>
             <li class="nav-item" role="presentation">
-                <a class="nav-link" href="../index.php">Se déconnecter</a>
+                <a class="nav-link" href="../deconnexion.php">Se déconnecter</a>
             </li>
         </ul>
         <div class="tab-content" id="myTabContent">
@@ -38,7 +65,7 @@
             
             <div class="tab-pane fade" id="commandes" role="tabpanel" aria-labelledby="commandes-tab">
                 <h2 class="mt-4">Mes Commandes</h2>
-                <form action="" method="post">
+                <form action="profil.php" method="post">
                     <div class="table-responsive">
                         <table class="table">
                             <thead>
@@ -52,32 +79,32 @@
                                 <tr>
                                     <td>Avancer</td>
                                     <td><?= $unmafficher->avancer ?></td>
-                                    <td><input type="text" class="form-control new-command" name="avancer" placeholder="Nouvelle commande"></td>
+                                    <td><input required type="text" class="form-control new-command" name="avancer" placeholder="Nouvelle commande"></td>
                                 </tr>
                                 <tr>
                                     <td>Reculer</td>
                                     <td><?= $unmafficher->reculer ?></td>
-                                    <td><input type="text" class="form-control new-command" name="reculer" placeholder="Nouvelle commande"></td>
+                                    <td><input required type="text" class="form-control new-command" name="reculer" placeholder="Nouvelle commande"></td>
                                 </tr>
                                 <tr>
                                     <td>Aller à gauche</td>
                                     <td><?= $unmafficher->tourner_gauche ?></td>
-                                    <td><input type="text" class="form-control new-command" name="gauche" placeholder="Nouvelle commande"></td>
+                                    <td><input required type="text" class="form-control new-command" name="gauche" placeholder="Nouvelle commande"></td>
                                 </tr>
                                 <tr>
                                     <td>Aller à droite</td>
                                     <td><?= $unmafficher->tourner_droite ?></td>
-                                    <td><input type="text" class="form-control new-command" name="droite" placeholder="Nouvelle commande"></td>
+                                    <td><input required type="text" class="form-control new-command" name="droite" placeholder="Nouvelle commande"></td>
                                 </tr>
                                 <tr>
                                     <td>Sauter</td>
                                     <td><?= $unmafficher->sauter ?></td>
-                                    <td><input type="text" class="form-control new-command" name="sauter" placeholder="Nouvelle commande"></td>
+                                    <td><input required type="text" class="form-control new-command" name="sauter" placeholder="Nouvelle commande"></td>
                                 </tr>
                                 <tr>
                                     <td>Tirer</td>
                                     <td><?= $unmafficher->tirer ?></td>
-                                    <td><input type="text" class="form-control new-command" name="tirer" placeholder="Nouvelle commande"></td>
+                                    <td><input required type="text" class="form-control new-command" name="tirer" placeholder="Nouvelle commande"></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -117,6 +144,24 @@
     <script src="../bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
+
+        const lescommandes = document.querySelectorAll("input");
+
+        for (const unecommande of lescommandes) {
+            if (unecommande.value == 'ARROWUP') {
+                unecommande.value == 'UPARROW';
+            }
+            if (unecommande.value == 'ARROWDOWN') {
+                unecommande.value == 'DOWNARROW';
+            }
+            if (unecommande.value == 'ARROWLEFT') {
+                unecommande.value == 'LEFTARROW';
+            }
+            if (unecommande.value == 'ARROWRIGHT') {
+                unecommande.value == 'RIGHTARROW';
+            }
+        }
+
         document.addEventListener('DOMContentLoaded', function () {
             const newCommandFields = document.querySelectorAll('.new-command');
 
@@ -124,9 +169,13 @@
                 field.addEventListener('keydown', function (event) {
                     event.preventDefault();
                     this.value = event.key.toUpperCase();
+
                 });
             });
+            
         });
+        //On recharge la page
+        //window.location.href = 'profil.php';
     </script>
 </body>
 </html>
