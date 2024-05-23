@@ -21,5 +21,6 @@
 
 
     <div>Accueil joueur</div>
+    <a href="profil.php">Mon profil</a>
 </body>
 </html>

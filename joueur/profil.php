@@ -2,6 +2,7 @@
     require_once '../config.php'; // On inclu la connexion à la bdd
     require("../requetes.php");
     session_start();
+    verificationconnexionpersonne();
     $mafficher = mafficher();
 
     if (isset($_POST['avancer'])) {
@@ -52,7 +53,7 @@
                 <button class="nav-link" id="scores-tab" data-bs-toggle="tab" data-bs-target="#scores" type="button" role="tab" aria-controls="scores" aria-selected="false">Mes Scores</button>
             </li>
             <li class="nav-item" role="presentation">
-                <a class="nav-link" href="../index.php">Se déconnecter</a>
+                <a class="nav-link" href="../deconnexion.php">Se déconnecter</a>
             </li>
         </ul>
         <div class="tab-content" id="myTabContent">
@@ -168,9 +169,13 @@
                 field.addEventListener('keydown', function (event) {
                     event.preventDefault();
                     this.value = event.key.toUpperCase();
+
                 });
             });
+            
         });
+        //On recharge la page
+        //window.location.href = 'profil.php';
     </script>
 </body>
 </html>

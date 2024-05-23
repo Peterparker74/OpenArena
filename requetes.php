@@ -10,7 +10,7 @@ function verificationconnexionpersonne()
         $result = $sql->fetch()['type'];
 
 		if(!isset($_SESSION['pseudo']) | empty($_SESSION['pseudo']) | $result!="personne"){
-		    header('Location:/openarena/accueil/accueil.php');
+		    header('Location:/OpenArena/index.php');
 		    die();
 		}
 		else{
@@ -37,7 +37,7 @@ function verifierconnexionorganisateur()
         $result = $sql->fetch()['type'];
 
 		if(!isset($_SESSION['pseudo']) | empty($_SESSION['pseudo']) | $result!="organisateur"){
-		    header('Location:/openarena/accueil/accueil.php');
+		    header('Location:/OpenArena/index.php');
 		    die();
 		}
 		else{

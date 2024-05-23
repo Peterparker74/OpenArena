@@ -164,6 +164,7 @@
     <div style="height: 40px;background-color: blue;display: flex;align-items: center;">
 <a href="../creerevenement/index.php"><button style="background: black;border: none;color: white;border-radius: white;height: 25px;border-radius: 5px;margin-left: 30px;">Définir un evenement</button></a>
 <a href="index.php"><button style="background: black;border: none;color: white;border-radius: white;height: 25px;border-radius: 5px;margin-left: 30px;">Serveur Openarena</button></a>
+<a href="index-servers.php"><button style="background: black;border: none;color: white;border-radius: white;height: 25px;border-radius: 5px;margin-left: 30px;">Autres serveurs</button></a>
 <a href="affichage.php"><button style="background: black;border: none;color: white;border-radius: white;height: 25px;border-radius: 5px;margin-left: 30px;">Tournois</button></a>
 <a href="competition.php"><button style="background: black;border: none;color: white;border-radius: white;height: 25px;border-radius: 5px;margin-left: 30px;">Créer tournoi</button></a>
 </div>
@@ -217,19 +218,26 @@
 
 
         // Afficher le statut du serveur
+       
         echo "<p>Statut du serveur : $server_status</p>";
 
         // Désactiver le bouton "Démarrer serveur" si le serveur est déjà démarré
         if ($server_status === "Actif") {
             echo '<button type="submit" name="start" class="start" disabled>Démarrer serveur</button>';
+            //echo '<button  disabled >Ajouter des bots</button>';
         } else {
             echo '<button type="submit" name="start" class="start">Démarrer serveur</button>';
+            //echo '<button   >Ajouter des bots</button>';
+            
+            
         }
 
-        // Désactiver le bouton "Arrêter serveur" si le serveur est déjà arrêté
+        //Désactiver le bouton "Arrêter serveur" si le serveur est déjà arrêté
         if ($server_status === "Inactif") {
-            echo '<button type="submit" name="stop" class="stop" disabled>Arrêter serveur</button>';
+           
+            echo '<button type="submit" name="stop" class="stop" disabled>Arrêter serveur</button>'; 
         } else {
+            echo '<a href="ajouterbots.php"  style="color: inherit; text-decoration: none;" >Ajouter des bots</a>';
             echo '<button type="submit" name="stop" class="stop">Arrêter serveur</button>';
         }
         ?>
