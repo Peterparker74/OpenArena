@@ -1,5 +1,64 @@
 <?php 
-    require_once 'config.php'; // On inclu la connexion à la bdd
+
+
+
+
+require_once 'config.php'; // On inclut la connexion à la BDD
+require("requetes.php");
+
+session_start();
+
+// Si les variables existent et ne sont pas vides
+if (!empty($_POST['nom'])) {
+    // Patch XSS
+    $pseudo = str_replace(" ", "", htmlspecialchars(strtolower($_POST['prenom']))) . "_" . str_replace(" ", "", htmlspecialchars(strtolower($_POST['nom'])));
+    $nomdutilisateur = str_replace(" ", "", htmlspecialchars($_POST['nom']));
+    $prenom = str_replace(" ", "", htmlspecialchars($_POST['prenom']));
+    $ville = str_replace(" ", "", htmlspecialchars($_POST['ville']));
+    $sexe = str_replace(" ", "", htmlspecialchars($_POST['sexe']));
+    $motdepasse = htmlspecialchars($_POST['motdepasse']);
+    $motdepasse_retype = htmlspecialchars($_POST['motdepasse_retype']);
+
+    if($motdepasse === $motdepasse_retype)
+    {
+        
+            // Connexion au serveur distant
+            $connection = ssh2_connect('195.221.40.66', 22);
+            if (!$connection) {
+                echo "Échec de la connexion au serveur";
+                exit;
+            } else {
+                echo "Connexion au serveur réussie<br>";
+            }
+
+            // Authentification
+            if (!ssh2_auth_password($connection, 'Administrateur', 'Admin24&')) {
+                echo "Échec de l'authentification";
+                exit;
+            } else {
+                echo "Authentification réussie<br>";
+            }
+
+            // Construire la commande dsadd user avec les valeurs des variables du formulaire
+            $command = 'dsadd user "CN=' . $prenom . ' ' . $nomdutilisateur . ',OU=openarena,DC=openarena-paris.fr,DC=fr" -samid "' . $prenom . '" -upn "' . $prenom . '@openarena-paris.fr" -pwd "' . $motdepasse . '" -fn "' . $prenom . '" -ln "' . $nomdutilisateur . '" -office "' . $ville . '" -desc "' . $sexe . '"';
+
+            // Exécuter la commande dsadd user
+            $stream = ssh2_exec($connection, $command);
+            stream_set_blocking($stream, true);
+            $output = stream_get_contents($stream);
+
+            // Afficher la sortie de la commande
+            echo "Sortie de la commande : <br>";
+            echo $output;
+
+            // Fermeture de la connexion SSH
+            ssh2_disconnect($connection);
+    }
+
+}
+
+
+    /*require_once 'config.php'; // On inclu la connexion à la bdd
     require("requetes.php");
 
     session_start();
@@ -99,7 +158,7 @@
                                 }else{ header('Location: inscription.php?reg_err=pseudo_length'); die();}
                             }else{ header('Location: inscription.php?reg_err=already'); die();}
 
-}
+}*/
 
        
-
+?>

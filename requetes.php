@@ -2,8 +2,12 @@
 
 function verificationconnexionpersonne()
 {
-
-	if (require("config.php")) {
+if(!$_SESSION["groups"] = "openarena")
+{
+	header('Location:/OpenArena/index.php');
+	die();
+}
+	/*if (require("config.php")) {
 
 		$sql = $bdd->prepare('SELECT * FROM utilisateurs WHERE pseudo = ?');
         $sql->execute(array($_SESSION['pseudo']));
@@ -23,14 +27,19 @@ function verificationconnexionpersonne()
 	
 
 		}
-	}
+	}*/
 
 }
 
 function verifierconnexionorganisateur()
 {
+	if(!$_SESSION["groupe"] = "organisateur")
+	{
+		header('Location:/OpenArena/index.php');
+		die();
+	}
 
-	if (require("config.php")) {
+	/*if (require("config.php")) {
 
 		$sql = $bdd->prepare('SELECT * FROM utilisateurs WHERE pseudo = ?');
         $sql->execute(array($_SESSION['pseudo']));
@@ -50,7 +59,7 @@ function verifierconnexionorganisateur()
 	
 
 		}
-	}
+	}*/
 
 }
 

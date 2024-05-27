@@ -97,7 +97,7 @@
                     <a style="display: flex;align-items: center;justify-content: flex-start;border-top: 2px solid lightgray;padding-top: 15px;" href="../../deconnexion.php">
                         <svg style="margin: 0px 10px 30px 23px ;" height="27" viewBox="0 0 21 21" width="27" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" transform="matrix(-1 0 0 1 18 3)"><path d="m10.595 10.5 2.905-3-2.905-3"/><path d="m13.5 7.5h-9"/><path d="m10.5.5-8 .00224609c-1.1043501.00087167-1.9994384.89621131-2 2.00056153v9.99438478c.0005616 1.1043502.8956499 1.9996898 2 2.0005615l8 .0022461"/></g></svg>
                         
-                        <div class="instruction">Se déconnecter</div>
+                        <div class="instruction" >Se déconnecter</div>
                         
                         
                     </a>
@@ -110,6 +110,7 @@
         <div style="height: 40px;background-color: blue;display: flex;align-items: center;">
             <a href="#"><button style="background: black;border: none;color: white;border-radius: white;height: 25px;border-radius: 5px;margin-left: 30px;">Définir un evenement</button></a>
             <a href="../index.php"><button style="background: black;border: none;color: white;border-radius: white;height: 25px;border-radius: 5px;margin-left: 30px;">Serveur Openarena</button></a>
+            <a href="../index_servers.php"><button style="background: black;border: none;color: white;border-radius: white;height: 25px;border-radius: 5px;margin-left: 30px;">Autres serveurs</button></a>
             <a href="../affichage.php"><button style="background: black;border: none;color: white;border-radius: white;height: 25px;border-radius: 5px;margin-left: 30px;">Tournois</button></a>
             <a href="../competition.php"><button style="background: black;border: none;color: white;border-radius: white;height: 25px;border-radius: 5px;margin-left: 30px;">Créer tournoi</button></a>
         </div>
