@@ -178,10 +178,10 @@
             // Connexion au serveur distant
             $connection = ssh2_connect('195.221.40.129', 22);
             if (!$connection) {
-                echo "Échec de la connexion au serveur";
+            //    echo "Échec de la connexion au serveur";
                 exit;
             } else {
-                echo "Connexion au serveur réussie<br>";
+            //    echo "Connexion au serveur réussie<br>";
             }
 
            
@@ -189,10 +189,10 @@
 
             // Authentification
             if (!ssh2_auth_password($connection, 'rt', 'rt')) {
-                echo "Échec de l'authentification";
+            //    echo "Échec de l'authentification";
                 exit;
             } else {
-                echo "Authentification réussie<br>";
+           //     echo "Authentification réussie<br>";
             }
 
              //Exécution de la commande
